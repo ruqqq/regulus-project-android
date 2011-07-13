@@ -6,15 +6,20 @@ public class ModuleSlot extends Timeslot {
 
     public ModuleSlot(String title, String date, String venue, String time) {
         super(title, date, venue, time);
+
+        String[] date_array = date.split(" ");
+
+        this.day = date_array[1];
+        this.day = this.day.substring(1, this.day.length()-1).toLowerCase();
+
+        String[] day_date_array = date_array[0].split("/");
+        this.day_date = day_date_array[0];
     }
     
     public ModuleSlot(String id, String problem, String title, String date, String venue, String time) {
+        this(title, date, venue, time);
         this.id = id;
         this.problem = problem;
-        this.title = title;
-        this.date = date;
-        this.venue = venue;
-        this.time = time;
     }
 
     public String getId() {

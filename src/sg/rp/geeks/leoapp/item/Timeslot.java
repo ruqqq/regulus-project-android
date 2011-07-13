@@ -5,6 +5,8 @@ public class Timeslot {
     protected String date;
     protected String venue;
     protected String time;
+    protected String day;
+    protected String day_date;
 
     public Timeslot(String title, String date, String venue, String time) {
         this.title = title;
@@ -45,6 +47,22 @@ public class Timeslot {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getDay_date() {
+        return day_date;
+    }
+
+    public void setDay_date(String day_date) {
+        this.day_date = day_date;
     }
 
     @Override

@@ -329,6 +329,8 @@ public class TimetableActivity extends GDActivity
 
             ModuleSlot moduleSlot = items.get(position);
 
+            ((TextView) convertView.findViewById(R.id.day)).setText(moduleSlot.getDay());
+            ((TextView) convertView.findViewById(R.id.day_date)).setText(moduleSlot.getDay_date());
             ((TextView) convertView.findViewById(R.id.title)).setText(moduleSlot.getTitle());
             ((TextView) convertView.findViewById(R.id.subtitle1)).setText("Class - ");
             ((TextView) convertView.findViewById(R.id.subtitle2)).setText(moduleSlot.getVenue());
@@ -363,6 +365,8 @@ public class TimetableActivity extends GDActivity
 
             UTSlot utSlot = items.get(position);
 
+            ((TextView) convertView.findViewById(R.id.day)).setText(utSlot.getDay());
+            ((TextView) convertView.findViewById(R.id.day_date)).setText(utSlot.getDay_date());
             ((TextView) convertView.findViewById(R.id.title)).setText(utSlot.getTitle());
             ((TextView) convertView.findViewById(R.id.subtitle1)).setText("Class - ");
             ((TextView) convertView.findViewById(R.id.subtitle2)).setText(utSlot.getVenue());
