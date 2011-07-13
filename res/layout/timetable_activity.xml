@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/sg.rp.geeks.leoapp"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout
+        android:layout_width="fill_parent"
+		android:gravity="center_horizontal"
+        android:id="@+id/header_layout"
+		android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tab_bar">
+		<sg.rp.geeks.leoapp.widget.TitleFlowIndicator
+			android:id="@+id/vf_timetable_indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+			app:footerLineHeight="0"
+			app:footerTriangleHeight="5"
+            app:footerColor="#ffffffff"
+            app:textColor="#ff0f630e"
+            app:selectedColor="#ffffffff"
+            app:textSize="12" />
+	</LinearLayout>
+	<sg.rp.geeks.leoapp.widget.ViewFlow
+		android:duplicateParentState="true"
+        android:id="@+id/vf_timetable"
+		android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dp">
+
+    </sg.rp.geeks.leoapp.widget.ViewFlow>
+    <!--<RelativeLayout
+        android:id="@+id/header_timetable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+    <ViewFlipper
+        android:id="@+id/vf_timetable"
+        android:focusable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:id="@+id/lv_class_ut_timetable"
+            android:background="#ccc"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+        <LinearLayout
+            android:id="@+id/lv_class_timetable"
+            android:background="#999"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+        <LinearLayout
+            android:id="@+id/lv_ut_timetable"
+            android:background="#333"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </ViewFlipper>-->
+</LinearLayout>
+
