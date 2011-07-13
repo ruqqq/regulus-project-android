@@ -224,7 +224,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 		for (int iLoop = 0; iLoop < count; iLoop++) {
 			Rect bounds = calcBounds(iLoop, paint);
 			int w = (bounds.right - bounds.left);
-			int h = (bounds.bottom - bounds.top);
+			int h = (bounds.bottom - bounds.top + 3);
 			bounds.left = (getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth());
 			bounds.right = bounds.left + w;
 			bounds.top = 0;
