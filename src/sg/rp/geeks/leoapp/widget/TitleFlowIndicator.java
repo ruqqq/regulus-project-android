@@ -124,15 +124,15 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 		// Verify if the current view must be clipped to the screen
 		Rect curViewBound = bounds.get(currentPosition);
 		int curViewWidth = curViewBound.right - curViewBound.left;
-		if (curViewBound.left < 0) {
+		if (curViewBound.left < 10) {
 			// Try to clip to the screen (left side)
-			curViewBound.left = 0;
-			curViewBound.right = curViewWidth;
+			curViewBound.left = 10;
+			curViewBound.right = curViewWidth - 10;
 		}
 		if (curViewBound.right > getLeft() + getWidth()) {
 			// Try to clip to the screen (right side)
-			curViewBound.right = getLeft() + getWidth();
-			curViewBound.left = curViewBound.right - curViewWidth;
+			curViewBound.right = getLeft() + getWidth() - 10;
+			curViewBound.left = curViewBound.right - curViewWidth + 10;
 		}
 		
 		// Left views starting from the current position
@@ -143,7 +143,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 				// Si left side is outside the screen
 				if (bound.left < 0) {
 					// Try to clip to the screen (left side)
-					bound.left = 0;
+					bound.left = 10;
 					bound.right = w;
 					// Except if there's an intersection with the right view
 					if (iLoop < count - 1 && currentPosition != iLoop) {
@@ -170,8 +170,8 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 					if (iLoop > 0 && currentPosition != iLoop) {
 						Rect leftBound = bounds.get(iLoop - 1);
 						// Intersection
-						if (bound.left - TITLE_PADDING < leftBound.right) {
-							bound.left = leftBound.right + titlePadding;
+						if (bound.left - TITLE_PADDING < leftBound.right ) {
+							bound.left = leftBound.right + titlePadding + 10;
 						}
 					}
 				}
@@ -187,8 +187,8 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 			if ((bound.left > getLeft() && bound.left < getLeft() + getWidth()) || (bound.right > getLeft() && bound.right < getLeft() + getWidth())) {
 				Paint paint = paintText;
 				// Change the color is the title is closed to the center
-				int middle = (bound.left + bound.right) / 2;
-				if (Math.abs(middle - (getWidth() / 2)) < 20) {
+				int middle = ((bound.left + bound.right) / 2 );
+				if (Math.abs(middle - (getWidth() / 2)) < 60) {
 					paint = paintSelected;
 				}
 			    canvas.drawText(title, bound.left, bound.bottom, paint);
@@ -218,6 +218,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 	 * @return
 	 */
 	private ArrayList<Rect> calculateAllBounds(Paint paint) {
+
 		ArrayList<Rect> list = new ArrayList<Rect>();
 		// For each views (If no values then add a fake one)
 		int count = (viewFlow != null && viewFlow.getAdapter() != null) ? viewFlow.getAdapter().getCount() : 1;
@@ -225,8 +226,13 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 			Rect bounds = calcBounds(iLoop, paint);
 			int w = (bounds.right - bounds.left);
 			int h = (bounds.bottom - bounds.top + 3);
-			bounds.left = (getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth());
-			bounds.right = bounds.left + w;
+            String title = getTitle(iLoop);
+            if(iLoop == 1) {
+			    bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth())) - (int) paint.measureText(title)/4;
+            } else {
+                bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth()));
+            }
+			bounds.right = bounds.left + w + 10;
 			bounds.top = 0;
 			bounds.bottom = h;
 			list.add(bounds);
