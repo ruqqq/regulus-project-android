@@ -1,15 +1,22 @@
 package sg.rp.geeks.leoapp.item;
 
+import org.apache.commons.logging.Log;
+
+import java.security.Key;
+
 public class UTSlot extends Timeslot {
     private String UT;
-
+    final String[] MONTHS = {"jan","feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
     public UTSlot(String title, String date, String venue, String time) {
         super(title, date, venue, time);
 
         String[] date_array = date.split(" ");
 
-        this.day = date_array[1];
+        this.day = date_array[0];
         this.day = this.day.substring(1, this.day.length()-1).toLowerCase();
+
+        String[] temp = this.day.split("/");
+        this.day = MONTHS[Integer.parseInt(temp[1]) - 1];
 
         String[] day_date_array = date_array[0].split("/");
         this.day_date = day_date_array[0];
