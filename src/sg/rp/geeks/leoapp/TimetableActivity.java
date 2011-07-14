@@ -50,6 +50,7 @@ public class TimetableActivity extends GDActivity
     private BaseAdapter[] mAdapters = new BaseAdapter[2];
 
     private SharedPreferences prefs;
+    String username = "", password = "";
 
     /** Called when the activity is first created. */
     @Override
@@ -122,15 +123,19 @@ public class TimetableActivity extends GDActivity
     public void onResume() {
         super.onResume();
 
-        String username = prefs.getString("pref_key_rp_username", "");
-        String password = prefs.getString("pref_key_rp_password", "");
+        String prefUsername = prefs.getString("pref_key_rp_username", "");
+        String prefPassword = prefs.getString("pref_key_rp_password", "");
 
-        if (username.equals("") || password.equals("")) {
+        if (prefUsername.equals("") || prefPassword.equals("")) {
             showPreferences();
             Toast.makeText(TimetableActivity.this, "Please enter a username and password", Toast.LENGTH_LONG).show();
         } else {
-            server = new DanteServer(this, username, password);
-            reloadData();
+            if (!this.username.equals(prefUsername) || !this.password.equals(prefPassword)) {
+                this.username = prefUsername;
+                this.password = prefPassword;
+                server = new DanteServer(this, this.username, this.password);
+                reloadData();
+            }
         }
     }
 
