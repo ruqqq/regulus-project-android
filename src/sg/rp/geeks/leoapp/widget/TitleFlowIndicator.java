@@ -165,7 +165,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 				if (bound.right > getLeft() + getWidth()) {
 					// Try to clip to the screen (right side)
 					bound.right = getLeft() + getWidth();
-					bound.left = bound.right - w;
+					bound.left = bound.right - w + 10;
 					// Except if there's an intersection with the left view
 					if (iLoop > 0 && currentPosition != iLoop) {
 						Rect leftBound = bounds.get(iLoop - 1);
@@ -228,7 +228,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 			int h = (bounds.bottom - bounds.top + 3);
             String title = getTitle(iLoop);
             if(iLoop == 1) {
-			    bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth())) - (int) paint.measureText(title)/4;
+			    bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth())) - (int) paint.measureText(title)/3;
             } else {
                 bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth()));
             }
