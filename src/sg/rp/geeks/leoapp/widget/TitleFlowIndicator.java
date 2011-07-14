@@ -141,7 +141,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 				Rect bound = bounds.get(iLoop);
 				int w = bound.right - bound.left;
 				// Si left side is outside the screen
-				if (bound.left < 0) {
+				if (bound.left < 10) {
 					// Try to clip to the screen (left side)
 					bound.left = 10;
 					bound.right = w;
@@ -165,13 +165,13 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 				if (bound.right > getLeft() + getWidth()) {
 					// Try to clip to the screen (right side)
 					bound.right = getLeft() + getWidth();
-					bound.left = bound.right - w + 10;
+					bound.left = bound.right - w;
 					// Except if there's an intersection with the left view
 					if (iLoop > 0 && currentPosition != iLoop) {
 						Rect leftBound = bounds.get(iLoop - 1);
 						// Intersection
 						if (bound.left - TITLE_PADDING < leftBound.right ) {
-							bound.left = leftBound.right + titlePadding + 10;
+							bound.left = leftBound.right + titlePadding;
 						}
 					}
 				}

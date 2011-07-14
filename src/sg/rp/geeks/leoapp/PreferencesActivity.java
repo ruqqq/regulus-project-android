@@ -52,14 +52,14 @@ public class PreferencesActivity extends PreferenceActivity {
         final EditTextPreference prefUsername = new EditTextPreference(this);
         prefUsername.setKey("pref_key_rp_username");
         prefUsername.setPersistent(true);
-        prefUsername.setTitle("RP Username");
+        prefUsername.setTitle("RP Student ID");
         String username = prefs.getString("pref_key_rp_username", "");
         if (username.equals("")) prefUsername.setSummary("Not set");
         else {
             prefUsername.setDefaultValue(username);
             prefUsername.setSummary(username);
         }
-        prefUsername.setDialogMessage("Your RP Username:");
+        prefUsername.setDialogMessage("Your RP Student ID (e.g. XXXXX):");
         prefUsername.getEditText().setRawInputType(InputType.TYPE_CLASS_NUMBER);
         prefUsername.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
             public boolean onPreferenceChange(Preference preference, Object o) {
