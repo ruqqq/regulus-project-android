@@ -25,6 +25,8 @@ import sg.rp.geeks.leoapp.widget.TitleProvider;
 import sg.rp.geeks.leoapp.widget.ViewFlow;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class TimetableActivity extends GDActivity
 {
@@ -216,6 +218,7 @@ public class TimetableActivity extends GDActivity
                     mClasses = (ArrayList<ModuleSlot>) object;
                     ArrayList<String> problems_title = new ArrayList<String>();
                     ArrayList<Problem> problems = new ArrayList<Problem>();
+                    Collections.reverse(mClasses);
                     for (ModuleSlot m : mClasses) {
                         Problem problem;
                         if (!problems_title.contains("Problem "+m.getProblem())) {
@@ -274,6 +277,7 @@ public class TimetableActivity extends GDActivity
                     mUTs = (ArrayList<UTSlot>) object;
                     ArrayList<String> ut_title = new ArrayList<String>();
                     ArrayList<UT> uts = new ArrayList<UT>();
+                    Collections.reverse(mUTs);
                     for (UTSlot m : mUTs) {
                         UT ut;
                         if (!ut_title.contains("Understanding Test "+m.getUT())) {
@@ -291,6 +295,7 @@ public class TimetableActivity extends GDActivity
                     }
 
                     mSectionedUTsAdapter.removeAllSections();
+                    Collections.reverse(uts);
                     for (UT ut : uts) {
                         Log.d("Regulus", "Added to adapter: "+ut.name);
                         UTsAdapter uTsAdapter = new UTsAdapter(ut.uts);
