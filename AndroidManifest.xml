@@ -19,6 +19,6 @@
         <activity android:name="PreferencesActivity"
                   android:label="@string/app_preferences"/>
     </application>
-
+    <uses-sdk android:minSdkVersion="4" />
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest> 
