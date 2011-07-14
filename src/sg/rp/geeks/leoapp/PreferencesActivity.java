@@ -81,7 +81,6 @@ public class PreferencesActivity extends PreferenceActivity {
             prefPassword.setSummary("(masked)");
         }
         prefPassword.setDialogMessage("Your RP Password:");
-        prefPassword.getEditText().setTransformationMethod(new PasswordTransformationMethod());
         prefPassword.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
             public boolean onPreferenceChange(Preference preference, Object o) {
                 if (!o.equals("")) prefPassword.setSummary("(masked)");
