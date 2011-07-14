@@ -100,7 +100,7 @@ public class PreferencesActivity extends PreferenceActivity {
         prefApplicationVersion.setSummary("©2011 Geeks@RP");
         prefApplicationVersion.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
             public boolean onPreferenceClick(Preference preference) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/"));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/geeksatrp"));
                 startActivity(i);
                 return false;
             }
