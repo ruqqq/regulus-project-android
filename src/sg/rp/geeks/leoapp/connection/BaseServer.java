@@ -99,9 +99,11 @@ public class BaseServer {
         return SERVER_BASE_URL;
     }
 
-    protected CompletedResponse doPost(List<NameValuePair> params, final Delegate delegate) {
+    protected CompletedResponse doPost(List<NameValuePair> params, String postUrl, final Delegate delegate) {
         try {
-            HttpResponse res = makePostRequest(getServerURL(), params);
+            HttpResponse res = makePostRequest(postUrl, params);
+            Log.d(TAG, postUrl);
+            Log.d(TAG, params.toString());
             if (res.getStatusLine().getStatusCode() == 200) {
                 ByteArrayOutputStream outstream = new ByteArrayOutputStream();
                 res.getEntity().writeTo(outstream);

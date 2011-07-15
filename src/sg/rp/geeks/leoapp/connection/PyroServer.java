@@ -10,19 +10,20 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import sg.rp.geeks.leoapp.item.ModuleSlot;
 import sg.rp.geeks.leoapp.item.UTSlot;
+import sg.rp.geeks.leoapp.item.GradeSlot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DanteServer extends BaseServer implements BaseServer.BaseRequest {
-    public String SERVER_BASE_URL = "http://definerp.com/leo/leo.php";
+public class PyroServer extends BaseServer implements BaseServer.BaseRequest {
+    public String SERVER_BASE_URL = "http://emoosx.me/regulus/api/";
 
     private String username;
     private String password;
 
     private final Handler mHandler = new Handler();
 
-    public DanteServer(Context context, String username, String password) {
+    public PyroServer(Context context, String username, String password) {
         super(context);
 
         this.username = username;
@@ -31,8 +32,8 @@ public class DanteServer extends BaseServer implements BaseServer.BaseRequest {
 
     private List<NameValuePair> makeParams() {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("user", username));
-        params.add(new BasicNameValuePair("pass", password));
+        params.add(new BasicNameValuePair("sid", username));
+        params.add(new BasicNameValuePair("password", password));
         return params;
     }
 
@@ -40,17 +41,33 @@ public class DanteServer extends BaseServer implements BaseServer.BaseRequest {
         return SERVER_BASE_URL;
     }
 
+    //mode will be either ut or class
+    public String getScheduleUrl(String mode) {
+        if(mode.equals("ut")) {
+            return getServerURL()+"classroom/utSchedule"; //UT grades
+        }
+        return getServerURL()+"classroom/classSchedule"; //Daily grades
+    }
+
+    //mode will be either ut or daily
+    public String getGradesUrl(String mode) {
+        if(mode.equals("ut")) {
+            return getServerURL() + "grades/recentUTGrades";
+        }
+        return getServerURL() + "grades/recentGrades";
+    }
+
     public void getClasses(final Delegate delegate) {
         new Thread(new Runnable() {
             public void run() {
-                JSONArray jsonArray = doPost("timetable", delegate);
+                JSONArray jsonArray = doPost(getScheduleUrl("class"), delegate);
                 if (jsonArray != null) {
                     final ArrayList<ModuleSlot> timetable = new ArrayList<ModuleSlot>();
-
                     try {
+                        Log.d(TAG, jsonArray.length()+"");
                         for (int i = 0; i < jsonArray.length(); i++) {
                             final JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            timetable.add(new ModuleSlot(jsonObject.getString("id"), jsonObject.getString("problem"), jsonObject.getString("title"), jsonObject.getString("date"), jsonObject.getString("venue"), jsonObject.getString("time")));
+                            timetable.add(new ModuleSlot(jsonObject.getString("module_code"), jsonObject.getString("problem_no"), jsonObject.getString("module_name"), jsonObject.getString("date"), jsonObject.getString("venue"), jsonObject.getString("time"), jsonObject.getString("day")));
                         }
 
                         mHandler.post(new Runnable() {
@@ -73,15 +90,14 @@ public class DanteServer extends BaseServer implements BaseServer.BaseRequest {
     public void getUTs(final Delegate delegate) {
         new Thread(new Runnable() {
             public void run() {
-                JSONArray jsonArray = doPost("ut", delegate);
+                JSONArray jsonArray = doPost(getScheduleUrl("ut"), delegate);
                 if (jsonArray != null) {
                     final ArrayList<UTSlot> timetable = new ArrayList<UTSlot>();
 
                     try {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             final JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String[] ut_split = jsonObject.getString("title").split(" ");
-                            timetable.add(new UTSlot(ut_split[3], ut_split[0]+" UT"+ut_split[3], jsonObject.getString("date"), jsonObject.getString("venue"), jsonObject.getString("time")));
+                            timetable.add(new UTSlot(jsonObject.getString("ut_no"), jsonObject.getString("ut_name"), jsonObject.getString("date"), jsonObject.getString("venue"), jsonObject.getString("time")));
                         }
 
                         mHandler.post(new Runnable() {
@@ -101,11 +117,39 @@ public class DanteServer extends BaseServer implements BaseServer.BaseRequest {
         }).start();
     }
 
-    private JSONArray doPost(String mode, final Delegate delegate) {
-        List<NameValuePair> params = makeParams();
-        params.add(new BasicNameValuePair("mode", mode));
+    public void getRecentGrades(final Delegate delegate) {
+        new Thread(new Runnable() {
+            public void run() {
+                JSONArray jsonArray = doPost(getGradesUrl("daily"), delegate);
+                if (jsonArray != null) {
+                    final ArrayList<GradeSlot> grades = new ArrayList<GradeSlot>();
 
-        CompletedResponse res = doPost(params, delegate);
+                    try {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            final JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            grades.add(new GradeSlot(jsonObject.getString("module_code"), jsonObject.getString("problem"), jsonObject.getString("grade")));
+                        }
+                        mHandler.post(new Runnable() {
+                            public void run() {
+                                delegate.connectionEnded(null, grades);
+                            }
+                        });
+                    } catch (Exception e) {
+                        mHandler.post(new Runnable() {
+                            public void run() {
+                                delegate.connectionEnded("Error parsing JSON!", null);
+                            }
+                        });
+                    }
+                }
+            }
+        }).start();
+    }
+
+    private JSONArray doPost(String postUrl, final Delegate delegate) {
+        List<NameValuePair> params = makeParams();
+
+        CompletedResponse res = doPost(params, postUrl, delegate);
 
         if (res != null && res.error.equals("")) {
             try {

@@ -17,7 +17,7 @@ import greendroid.widget.LoaderActionBarItem;
 import greendroid.widget.GDActionBarItem.Type;
 import sg.rp.geeks.leoapp.adapter.SectionedAdapter;
 import sg.rp.geeks.leoapp.connection.BaseServer;
-import sg.rp.geeks.leoapp.connection.DanteServer;
+import sg.rp.geeks.leoapp.connection.PyroServer;
 import sg.rp.geeks.leoapp.item.ModuleSlot;
 import sg.rp.geeks.leoapp.item.UTSlot;
 import sg.rp.geeks.leoapp.widget.TitleFlowIndicator;
@@ -25,7 +25,6 @@ import sg.rp.geeks.leoapp.widget.TitleProvider;
 import sg.rp.geeks.leoapp.widget.ViewFlow;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class TimetableActivity extends GDActivity
@@ -40,7 +39,7 @@ public class TimetableActivity extends GDActivity
 
     private ViewFlow vfTimetable;
 
-    private DanteServer server;
+    private PyroServer server;
 
     private ArrayList<ModuleSlot> mClasses;
     private ArrayList<UTSlot> mUTs;
@@ -49,7 +48,7 @@ public class TimetableActivity extends GDActivity
 
     private SectionedAdapter mSectionedClassesAdapter;
     private SectionedAdapter mSectionedUTsAdapter;
-    private BaseAdapter[] mAdapters = new BaseAdapter[2];
+    private BaseAdapter[] mAdapters = new BaseAdapter[3];
 
     private SharedPreferences prefs;
     String username = "", password = "";
@@ -109,8 +108,9 @@ public class TimetableActivity extends GDActivity
             }
         };
 
-        mAdapters[0] = mSectionedClassesAdapter;
-        mAdapters[1] = mSectionedUTsAdapter;
+        mAdapters[0] = mSectionedUTsAdapter;
+        mAdapters[1] = mSectionedClassesAdapter;
+        mAdapters[2] = mSectionedUTsAdapter;
 
         vfTimetable = (ViewFlow) findViewById(R.id.vf_timetable);
         mTimetableViewsAdapter = new TimetableViewsAdapter();
@@ -119,6 +119,8 @@ public class TimetableActivity extends GDActivity
 		TitleFlowIndicator indicator = (TitleFlowIndicator) findViewById(R.id.vf_timetable_indicator);
 		indicator.setTitleProvider(mTimetableViewsAdapter);
 		vfTimetable.setFlowIndicator(indicator);
+
+        vfTimetable.setSelection(1); //Select the middle tab
     }
 
     @Override
@@ -135,7 +137,7 @@ public class TimetableActivity extends GDActivity
             if (!this.username.equals(prefUsername) || !this.password.equals(prefPassword)) {
                 this.username = prefUsername;
                 this.password = prefPassword;
-                server = new DanteServer(this, this.username, this.password);
+                server = new PyroServer(this, this.username, this.password);
                 reloadData();
             }
         }
@@ -218,7 +220,6 @@ public class TimetableActivity extends GDActivity
                     mClasses = (ArrayList<ModuleSlot>) object;
                     ArrayList<String> problems_title = new ArrayList<String>();
                     ArrayList<Problem> problems = new ArrayList<Problem>();
-                    Collections.reverse(mClasses);
                     for (ModuleSlot m : mClasses) {
                         Problem problem;
                         if (!problems_title.contains("Problem "+m.getProblem())) {
@@ -267,6 +268,7 @@ public class TimetableActivity extends GDActivity
                 }, 2000);
             }
         });
+
         server.getUTs(new BaseServer.Delegate() {
             public void connectionError(String error) {
 
@@ -277,7 +279,6 @@ public class TimetableActivity extends GDActivity
                     mUTs = (ArrayList<UTSlot>) object;
                     ArrayList<String> ut_title = new ArrayList<String>();
                     ArrayList<UT> uts = new ArrayList<UT>();
-                    Collections.reverse(mUTs);
                     for (UTSlot m : mUTs) {
                         UT ut;
                         if (!ut_title.contains("Understanding Test "+m.getUT())) {
@@ -293,9 +294,8 @@ public class TimetableActivity extends GDActivity
                         Log.d("Regulus", "Added to UT "+ut.name+": "+m.getTitle());
                         ut.uts.add(m);
                     }
-
-                    mSectionedUTsAdapter.removeAllSections();
                     Collections.reverse(uts);
+                    mSectionedUTsAdapter.removeAllSections();
                     for (UT ut : uts) {
                         Log.d("Regulus", "Added to adapter: "+ut.name);
                         UTsAdapter uTsAdapter = new UTsAdapter(ut.uts);
@@ -313,6 +313,8 @@ public class TimetableActivity extends GDActivity
                 }, 2000);
             }
         });
+
+
     }
 
     private class Problem {
@@ -388,7 +390,7 @@ public class TimetableActivity extends GDActivity
     }
 
     public class TimetableViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"Classes", "UT Schedule"};
+        private final String[] titles = {"Grades", "Classes", "UT Schedule"};
 
         public int getCount() {
             return titles.length;
