@@ -498,8 +498,8 @@ public class TimetableActivity extends GDActivity {
             ((TextView) convertView.findViewById(R.id.title)).setText(moduleSlot.getTitle());
             ((TextView) convertView.findViewById(R.id.subtitle1)).setText("Class - ");
             ((TextView) convertView.findViewById(R.id.subtitle2)).setText(moduleSlot.getVenue());
-            ((TextView) convertView.findViewById(R.id.time_hhmm)).setText(moduleSlot.getTime());
-            ((TextView) convertView.findViewById(R.id.time_ampm)).setText("am");
+            ((TextView) convertView.findViewById(R.id.time_hhmm)).setText(convertTime(moduleSlot.getTime()));
+            ((TextView) convertView.findViewById(R.id.time_ampm)).setText(getAmPm(moduleSlot.getTime()));
 
             return convertView;
         }
@@ -534,8 +534,8 @@ public class TimetableActivity extends GDActivity {
             ((TextView) convertView.findViewById(R.id.title)).setText(utSlot.getTitle());
             ((TextView) convertView.findViewById(R.id.subtitle1)).setText("Venue - ");
             ((TextView) convertView.findViewById(R.id.subtitle2)).setText(utSlot.getVenue());
-            ((TextView) convertView.findViewById(R.id.time_hhmm)).setText(utSlot.getTime());
-            ((TextView) convertView.findViewById(R.id.time_ampm)).setText("pm");
+            ((TextView) convertView.findViewById(R.id.time_hhmm)).setText(convertTime(utSlot.getTime()));
+            ((TextView) convertView.findViewById(R.id.time_ampm)).setText(getAmPm(utSlot.getTime()));
 
             return convertView;
         }
@@ -573,6 +573,25 @@ public class TimetableActivity extends GDActivity {
         public String getTitle(int position) {
             return titles[position];
         }
+    }
+
+    //Helper method for time conversion
+    private String getAmPm(String time) {
+        String[] temp = time.split(":");
+        String hour = temp[0];
+        if(Integer.parseInt(hour) >= 12) {
+            return "pm";
+        }
+        return "am";
+    }
+
+    private String convertTime(String time) {
+        String[] temp = time.split(":");
+        String hour = temp[0];
+        if(Integer.parseInt(hour) > 12) {
+            return String.valueOf(Integer.parseInt(hour)-12) + ":" + temp[1];
+        }
+        return time;
     }
 
     //Helper method for changing colors
