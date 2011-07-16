@@ -133,7 +133,6 @@ public class TimetableActivity extends GDActivity {
             }
         };
 
-
         mAdapters[0] = mSectionedRecentUTGradesAdapter;
         mAdapters[1] = mSectionedRecentGradesAdapter;
         mAdapters[2] = mSectionedClassesAdapter;
