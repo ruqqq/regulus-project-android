@@ -514,7 +514,7 @@ public class TimetableActivity extends GDActivity
             ((TextView) convertView.findViewById(R.id.day)).setText(utSlot.getDay());
             ((TextView) convertView.findViewById(R.id.day_date)).setText(utSlot.getDay_date());
             ((TextView) convertView.findViewById(R.id.title)).setText(utSlot.getTitle());
-            ((TextView) convertView.findViewById(R.id.subtitle1)).setText("Class - ");
+            ((TextView) convertView.findViewById(R.id.subtitle1)).setText("Venue - ");
             ((TextView) convertView.findViewById(R.id.subtitle2)).setText(utSlot.getVenue());
             ((TextView) convertView.findViewById(R.id.time_hhmm)).setText(utSlot.getTime());
             ((TextView) convertView.findViewById(R.id.time_ampm)).setText("pm");

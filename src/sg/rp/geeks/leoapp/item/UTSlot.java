@@ -6,7 +6,7 @@ import java.security.Key;
 
 public class UTSlot extends Timeslot {
     private String UT;
-    final String[] MONTHS = {"jan","feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
+    final String[] MONTHS = {"Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     public UTSlot(String title, String date, String venue, String time) {
         super(title, date, venue, time);
 
