@@ -146,6 +146,35 @@ public class PyroServer extends BaseServer implements BaseServer.BaseRequest {
         }).start();
     }
 
+    public void getRecetUTGrades(final Delegate delegate) {
+        new Thread(new Runnable() {
+            public void run() {
+                JSONArray jsonArray = doPost(getGradesUrl("ut"), delegate);
+                if (jsonArray != null) {
+                    final ArrayList<GradeSlot> grades = new ArrayList<GradeSlot>();
+
+                    try {
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            final JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            grades.add(new GradeSlot(jsonObject.getString("module_name"), jsonObject.getString("ut_no"), jsonObject.getString("ut_grade")));
+                        }
+                        mHandler.post(new Runnable() {
+                            public void run() {
+                                delegate.connectionEnded(null, grades);
+                            }
+                        });
+                    } catch (Exception e) {
+                        mHandler.post(new Runnable() {
+                            public void run() {
+                                delegate.connectionEnded("Error parsing JSON!", null);
+                            }
+                        });
+                    }
+                }
+            }
+        }).start();
+    }
+
     private JSONArray doPost(String postUrl, final Delegate delegate) {
         List<NameValuePair> params = makeParams();
 

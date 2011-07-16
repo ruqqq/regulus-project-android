@@ -29,8 +29,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class TimetableActivity extends GDActivity
-{
+public class TimetableActivity extends GDActivity {
     private final Handler mHandler = new Handler();
 
     /*private Animation slideLeftIn;
@@ -43,6 +42,7 @@ public class TimetableActivity extends GDActivity
 
     private PyroServer server;
 
+    private ArrayList<GradeSlot> mRecentUTGrades;
     private ArrayList<GradeSlot> mRecentGrades;
     private ArrayList<ModuleSlot> mClasses;
     private ArrayList<UTSlot> mUTs;
@@ -50,18 +50,20 @@ public class TimetableActivity extends GDActivity
     private TimetableViewsAdapter mTimetableViewsAdapter;
 
     private SectionedAdapter mSectionedRecentGradesAdapter;
+    private SectionedAdapter mSectionedRecentUTGradesAdapter;
     private SectionedAdapter mSectionedClassesAdapter;
     private SectionedAdapter mSectionedUTsAdapter;
 
-    private BaseAdapter[] mAdapters = new BaseAdapter[3];
+    private BaseAdapter[] mAdapters = new BaseAdapter[4];
 
     private SharedPreferences prefs;
     String username = "", password = "";
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // initialize views
@@ -71,16 +73,6 @@ public class TimetableActivity extends GDActivity
         // dirty way: hide home button
         getGDActionBar().findViewById(R.id.gd_action_bar_home_item).setVisibility(View.GONE);
         ((ViewGroup) getGDActionBar().findViewById(R.id.gd_action_bar_home_item).getParent()).getChildAt(1).setVisibility(View.GONE);
-
-        /*vfTimetable = (ViewFlipper) findViewById(R.id.vf_timetable);
-
-        slideLeftIn = AnimationUtils.loadAnimation(this, R.anim.slide_left_in);
-        slideLeftOut = AnimationUtils
-                .loadAnimation(this, R.anim.slide_left_out);
-        slideRightIn = AnimationUtils
-                .loadAnimation(this, R.anim.slide_right_in);
-        slideRightOut = AnimationUtils.loadAnimation(this,
-                R.anim.slide_right_out);*/
 
         // initialize objects
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -95,7 +87,21 @@ public class TimetableActivity extends GDActivity
                 }
                 result.setText(caption);
 
-                return(result);
+                return (result);
+            }
+        };
+
+        mRecentUTGrades = new ArrayList<GradeSlot>();
+        mSectionedRecentUTGradesAdapter = new SectionedAdapter() {
+            protected View getHeaderView(String caption, int index, int count, View convertView, ViewGroup parent) {
+                TextView result = (TextView) convertView;
+
+                if (convertView == null) {
+                    result = (TextView) getLayoutInflater().inflate(R.layout.list_section_header, null);
+                }
+                result.setText(caption);
+
+                return (result);
             }
         };
 
@@ -109,7 +115,7 @@ public class TimetableActivity extends GDActivity
                 }
                 result.setText(caption);
 
-                return(result);
+                return (result);
             }
         };
 
@@ -123,23 +129,25 @@ public class TimetableActivity extends GDActivity
                 }
                 result.setText(caption);
 
-                return(result);
+                return (result);
             }
         };
 
-        mAdapters[0] = mSectionedRecentGradesAdapter;
-        mAdapters[1] = mSectionedClassesAdapter;
-        mAdapters[2] = mSectionedUTsAdapter;
+
+        mAdapters[0] = mSectionedRecentUTGradesAdapter;
+        mAdapters[1] = mSectionedRecentGradesAdapter;
+        mAdapters[2] = mSectionedClassesAdapter;
+        mAdapters[3] = mSectionedUTsAdapter;
 
         vfTimetable = (ViewFlow) findViewById(R.id.vf_timetable);
         mTimetableViewsAdapter = new TimetableViewsAdapter();
-		vfTimetable.setAdapter(mTimetableViewsAdapter);
+        vfTimetable.setAdapter(mTimetableViewsAdapter);
 
-		TitleFlowIndicator indicator = (TitleFlowIndicator) findViewById(R.id.vf_timetable_indicator);
-		indicator.setTitleProvider(mTimetableViewsAdapter);
-		vfTimetable.setFlowIndicator(indicator);
+        TitleFlowIndicator indicator = (TitleFlowIndicator) findViewById(R.id.vf_timetable_indicator);
+        indicator.setTitleProvider(mTimetableViewsAdapter);
+        vfTimetable.setFlowIndicator(indicator);
 
-        vfTimetable.setSelection(1); //Select the middle tab
+        vfTimetable.setSelection(2); //Select the middle tab
     }
 
     @Override
@@ -180,27 +188,27 @@ public class TimetableActivity extends GDActivity
     // Create Option Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-	    super.onCreateOptionsMenu(menu);
-	    // Create and add our menu items
-	    MenuItem itemPreferences = menu.add(0, R.id.menu_preferences, Menu.NONE, "Preferences");
+        super.onCreateOptionsMenu(menu);
+        // Create and add our menu items
+        MenuItem itemPreferences = menu.add(0, R.id.menu_preferences, Menu.NONE, "Preferences");
 
-	    // Set their icons
-	    itemPreferences.setIcon(android.R.drawable.ic_menu_preferences);
+        // Set their icons
+        itemPreferences.setIcon(android.R.drawable.ic_menu_preferences);
 
-	    return true;
+        return true;
     }
 
     // Handles Option Menu Selection
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	    super.onOptionsItemSelected(item);
-	    switch (item.getItemId()) {
-		    case (R.id.menu_preferences):
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case (R.id.menu_preferences):
                 showPreferences();
-	    		break;
-	    }
+                break;
+        }
 
-	    return true;
+        return true;
     }
 
     private void showPreferences() {
@@ -217,7 +225,14 @@ public class TimetableActivity extends GDActivity
             public void connectionError(String error) {
                 mHandler.post(new Runnable() {
                     public void run() {
-                        reloadData();
+                        new AlertDialog.Builder(TimetableActivity.this)
+                                .setTitle("Error")
+                                .setMessage("The server is down. Please try again later.")
+                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                    }
+                                })
+                                .show();
                     }
                 });
 
@@ -235,23 +250,23 @@ public class TimetableActivity extends GDActivity
                     ArrayList<Problem> problems = new ArrayList<Problem>();
                     for (ModuleSlot m : mClasses) {
                         Problem problem;
-                        if (!problems_title.contains("Problem "+m.getProblem())) {
+                        if (!problems_title.contains("Problem " + m.getProblem())) {
                             problem = new Problem();
-                            problem.name = "Problem "+m.getProblem();
+                            problem.name = "Problem " + m.getProblem();
                             problems.add(problem);
                             problems_title.add(problem.name);
-                            Log.d("Regulus", "Added Problem "+m.getProblem());
+                            Log.d("Regulus", "Added Problem " + m.getProblem());
                         } else {
                             problem = problems.get(problems_title.indexOf("Problem " + m.getProblem()));
                         }
 
-                        Log.d("Regulus", "Added to problem "+problem.name+": "+m.getTitle());
+                        Log.d("Regulus", "Added to problem " + problem.name + ": " + m.getTitle());
                         problem.classes.add(m);
                     }
 
                     mSectionedClassesAdapter.removeAllSections();
                     for (Problem problem : problems) {
-                        Log.d("Regulus", "Added to adapter: "+problem.name);
+                        Log.d("Regulus", "Added to adapter: " + problem.name);
                         ClassesAdapter classesAdapter = new ClassesAdapter(problem.classes);
                         mSectionedClassesAdapter.addSection(problem.name, classesAdapter);
                     }
@@ -262,14 +277,14 @@ public class TimetableActivity extends GDActivity
                     mHandler.post(new Runnable() {
                         public void run() {
                             new AlertDialog.Builder(TimetableActivity.this)
-                                .setTitle("Error")
-                                .setMessage("Please check your username or password. If error persist, please try again later.")
-                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        showPreferences();
-                                    }
-                                })
-                                .show();
+                                    .setTitle("Error")
+                                    .setMessage("Please check your username or password. If error persist, please try again later.")
+                                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            showPreferences();
+                                        }
+                                    })
+                                    .show();
                         }
                     });
                 }
@@ -284,17 +299,7 @@ public class TimetableActivity extends GDActivity
 
         server.getUTs(new BaseServer.Delegate() {
             public void connectionError(String error) {
-                mHandler.post(new Runnable() {
-                    public void run() {
-                        reloadData();
-                    }
-                });
 
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        loaderItem.setLoading(false);
-                    }
-                }, 2000);
             }
 
             public void connectionEnded(String error, Object object) {
@@ -304,23 +309,23 @@ public class TimetableActivity extends GDActivity
                     ArrayList<UT> uts = new ArrayList<UT>();
                     for (UTSlot m : mUTs) {
                         UT ut;
-                        if (!ut_title.contains("Understanding Test "+m.getUT())) {
+                        if (!ut_title.contains("Understanding Test " + m.getUT())) {
                             ut = new UT();
-                            ut.name = "Understanding Test "+m.getUT();
+                            ut.name = "Understanding Test " + m.getUT();
                             uts.add(ut);
                             ut_title.add(ut.name);
-                            Log.d("Regulus", "Added UT "+m.getUT());
+                            Log.d("Regulus", "Added UT " + m.getUT());
                         } else {
                             ut = uts.get(ut_title.indexOf("Understanding Test " + m.getUT()));
                         }
 
-                        Log.d("Regulus", "Added to UT "+ut.name+": "+m.getTitle());
+                        Log.d("Regulus", "Added to UT " + ut.name + ": " + m.getTitle());
                         ut.uts.add(m);
                     }
                     Collections.reverse(uts);
                     mSectionedUTsAdapter.removeAllSections();
                     for (UT ut : uts) {
-                        Log.d("Regulus", "Added to adapter: "+ut.name);
+                        Log.d("Regulus", "Added to adapter: " + ut.name);
                         UTsAdapter uTsAdapter = new UTsAdapter(ut.uts);
                         mSectionedUTsAdapter.addSection(ut.name, uTsAdapter);
                     }
@@ -339,17 +344,7 @@ public class TimetableActivity extends GDActivity
 
         server.getRecentGrades(new BaseServer.Delegate() {
             public void connectionError(String error) {
-                mHandler.post(new Runnable() {
-                    public void run() {
-                        reloadData();
-                    }
-                });
 
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        loaderItem.setLoading(false);
-                    }
-                }, 2000);
             }
 
             public void connectionEnded(String error, Object object) {
@@ -360,23 +355,23 @@ public class TimetableActivity extends GDActivity
                     Collections.reverse(mRecentGrades);
                     for (GradeSlot m : mRecentGrades) {
                         Grade grade;
-                        if (!problems_title.contains("Problem "+m.getProblem())) {
+                        if (!problems_title.contains("Problem " + m.getProblem())) {
                             grade = new Grade();
-                            grade.name = "Problem "+m.getProblem();
+                            grade.name = "Problem " + m.getProblem();
                             grades.add(grade);
                             problems_title.add(grade.name);
-                            Log.d("Regulus", "Added Problem For Grades "+m.getProblem());
+                            Log.d("Regulus", "Added Problem For Grades " + m.getProblem());
                         } else {
                             grade = grades.get(problems_title.indexOf("Problem " + m.getProblem()));
                         }
 
-                        Log.d("Regulus", "Added To Problem For Grades "+grade.name+": "+m.getModuleCode());
+                        Log.d("Regulus", "Added To Problem For Grades " + grade.name + ": " + m.getModuleCode());
                         grade.grades.add(m);
                     }
 
                     mSectionedRecentGradesAdapter.removeAllSections();
                     for (Grade grade : grades) {
-                        Log.d("Regulus", "Added To Adapter: "+grade.name);
+                        Log.d("Regulus", "Added To Adapter: " + grade.name);
                         GradesAdapter gradesAdapter = new GradesAdapter(grade.grades);
                         mSectionedRecentGradesAdapter.addSection(grade.name, gradesAdapter);
                     }
@@ -392,6 +387,54 @@ public class TimetableActivity extends GDActivity
                 }, 2000);
             }
         });
+
+        server.getRecetUTGrades(new BaseServer.Delegate() {
+            public void connectionError(String error) {
+
+            }
+
+            public void connectionEnded(String error, Object object) {
+                if (object instanceof ArrayList) {
+                    mRecentUTGrades = (ArrayList<GradeSlot>) object;
+                    ArrayList<String> problems_title = new ArrayList<String>();
+                    ArrayList<Grade> grades = new ArrayList<Grade>();
+                    Collections.reverse(mRecentUTGrades);
+                    for (GradeSlot m : mRecentUTGrades) {
+                        Grade grade;
+                        if (!problems_title.contains("Understanding Test " + m.getProblem())) {
+                            grade = new Grade();
+                            grade.name = "Understanding Test " + m.getProblem();
+                            grades.add(grade);
+                            problems_title.add(grade.name);
+                            Log.d("Regulus", "Added UT For Grades " + m.getProblem());
+                        } else {
+                            grade = grades.get(problems_title.indexOf("Understanding Test " + m.getProblem()));
+                        }
+
+                        Log.d("Regulus", "Added To UT For Grades " + grade.name + ": " + m.getModuleCode());
+                        grade.grades.add(m);
+                    }
+
+                    mSectionedRecentUTGradesAdapter.removeAllSections();
+                    for (Grade grade : grades) {
+                        Log.d("Regulus", "Added To Adapter: " + grade.name);
+                        GradesAdapter gradesAdapter = new GradesAdapter(grade.grades);
+                        mSectionedRecentUTGradesAdapter.addSection(grade.name, gradesAdapter);
+                    }
+
+                    mSectionedRecentUTGradesAdapter.notifyDataSetChanged();
+                    mTimetableViewsAdapter.notifyDataSetChanged();
+                }
+
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        loaderItem.setLoading(false);
+                    }
+                }, 2000);
+            }
+        });
+
+
     }
 
     private class Grade {
@@ -412,7 +455,7 @@ public class TimetableActivity extends GDActivity
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            if(convertView == null) {
+            if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.grade_list_item, null);
             }
 
@@ -423,31 +466,6 @@ public class TimetableActivity extends GDActivity
             ((TextView) convertView.findViewById(R.id.grade_holder)).setText(gradeSlot.getGrade());
 
             return convertView;
-        }
-        //Helper method for changing colors
-        private int mapGradeToColor(String grade) {
-            if(grade.equalsIgnoreCase("A")) {
-                return R.color.A;
-            }
-            if(grade.equalsIgnoreCase("B")) {
-                return R.color.B;
-            }
-            if(grade.equalsIgnoreCase("C")) {
-                return R.color.C;
-            }
-            if(grade.equalsIgnoreCase("D")) {
-                return R.color.D;
-            }
-            if(grade.equalsIgnoreCase("E")) {
-                return R.color.E;
-            }
-            if(grade.equalsIgnoreCase("F")) {
-                return R.color.F;
-            }
-            if(grade.equalsIgnoreCase("X")) {
-                return R.color.X;
-            }
-            return 0;
         }
     }
 
@@ -469,7 +487,7 @@ public class TimetableActivity extends GDActivity
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            if(convertView == null) {
+            if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.timetable_list_item, null);
             }
 
@@ -505,7 +523,7 @@ public class TimetableActivity extends GDActivity
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            if(convertView == null) {
+            if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.timetable_list_item, null);
             }
 
@@ -524,7 +542,7 @@ public class TimetableActivity extends GDActivity
     }
 
     public class TimetableViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"Recent Grades", "Classes", "UT Schedule"};
+        private final String[] titles = {"UT Grades", "Daily Grades", "Classes", "UT Schedule"};
 
         public int getCount() {
             return titles.length;
@@ -539,21 +557,56 @@ public class TimetableActivity extends GDActivity
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            if(convertView == null) {
+            if (convertView == null) {
                 convertView = new ListView(TimetableActivity.this);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
                 //lp.setMargins(10, 10, 10, 10);
                 convertView.setLayoutParams(lp);
             }
 
-            Log.d("Regulus", "Assigning "+mAdapters[position]);
+            Log.d("Regulus", "Assigning " + mAdapters[position]);
             ((ListView) convertView).setAdapter(mAdapters[position]);
 
             return convertView;
         }
-    
+
         public String getTitle(int position) {
             return titles[position];
         }
+    }
+
+    //Helper method for changing colors
+    private int mapGradeToColor(String grade) {
+        if (grade.equalsIgnoreCase("A")) {
+            return R.color.A;
+        }
+        if (grade.equalsIgnoreCase("B")) {
+            return R.color.B;
+        }
+        if (grade.equalsIgnoreCase("B+")) {
+            return R.color.Bplus;
+        }
+        if (grade.equalsIgnoreCase("C")) {
+            return R.color.C;
+        }
+        if (grade.equalsIgnoreCase("C+")) {
+            return R.color.Cplus;
+        }
+        if (grade.equalsIgnoreCase("D")) {
+            return R.color.D;
+        }
+        if (grade.equalsIgnoreCase("D+")) {
+            return R.color.Dplus;
+        }
+        if (grade.equalsIgnoreCase("E")) {
+            return R.color.E;
+        }
+        if (grade.equalsIgnoreCase("F")) {
+            return R.color.F;
+        }
+        if (grade.equalsIgnoreCase("X")) {
+            return R.color.X;
+        }
+        return 0;
     }
 }
