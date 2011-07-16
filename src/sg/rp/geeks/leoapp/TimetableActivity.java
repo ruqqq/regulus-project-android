@@ -26,6 +26,7 @@ import sg.rp.geeks.leoapp.widget.TitleProvider;
 import sg.rp.geeks.leoapp.widget.ViewFlow;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 public class TimetableActivity extends GDActivity
@@ -216,17 +217,10 @@ public class TimetableActivity extends GDActivity
             public void connectionError(String error) {
                 mHandler.post(new Runnable() {
                     public void run() {
-                        new AlertDialog.Builder(TimetableActivity.this)
-                            .setTitle("Error")
-                            .setMessage("The server is down. Please try again later.")
-                            .setPositiveButton("Okay", new DialogInterface.OnClickListener(){
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                }
-                            })
-                            .show();
+                        reloadData();
                     }
                 });
-                
+
                 mHandler.postDelayed(new Runnable() {
                     public void run() {
                         loaderItem.setLoading(false);
@@ -290,7 +284,17 @@ public class TimetableActivity extends GDActivity
 
         server.getUTs(new BaseServer.Delegate() {
             public void connectionError(String error) {
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        reloadData();
+                    }
+                });
 
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        loaderItem.setLoading(false);
+                    }
+                }, 2000);
             }
 
             public void connectionEnded(String error, Object object) {
@@ -335,7 +339,17 @@ public class TimetableActivity extends GDActivity
 
         server.getRecentGrades(new BaseServer.Delegate() {
             public void connectionError(String error) {
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        reloadData();
+                    }
+                });
 
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        loaderItem.setLoading(false);
+                    }
+                }, 2000);
             }
 
             public void connectionEnded(String error, Object object) {
@@ -343,6 +357,7 @@ public class TimetableActivity extends GDActivity
                     mRecentGrades = (ArrayList<GradeSlot>) object;
                     ArrayList<String> problems_title = new ArrayList<String>();
                     ArrayList<Grade> grades = new ArrayList<Grade>();
+                    Collections.reverse(mRecentGrades);
                     for (GradeSlot m : mRecentGrades) {
                         Grade grade;
                         if (!problems_title.contains("Problem "+m.getProblem())) {
@@ -404,9 +419,35 @@ public class TimetableActivity extends GDActivity
             GradeSlot gradeSlot = items.get(position);
 
             ((TextView) convertView.findViewById(R.id.title)).setText(gradeSlot.getModuleCode());
+            ((TextView) convertView.findViewById(R.id.grade_holder)).setTextColor(getResources().getColor(mapGradeToColor(gradeSlot.getGrade())));
             ((TextView) convertView.findViewById(R.id.grade_holder)).setText(gradeSlot.getGrade());
 
             return convertView;
+        }
+        //Helper method for changing colors
+        private int mapGradeToColor(String grade) {
+            if(grade.equalsIgnoreCase("A")) {
+                return R.color.A;
+            }
+            if(grade.equalsIgnoreCase("B")) {
+                return R.color.B;
+            }
+            if(grade.equalsIgnoreCase("C")) {
+                return R.color.C;
+            }
+            if(grade.equalsIgnoreCase("D")) {
+                return R.color.D;
+            }
+            if(grade.equalsIgnoreCase("E")) {
+                return R.color.E;
+            }
+            if(grade.equalsIgnoreCase("F")) {
+                return R.color.F;
+            }
+            if(grade.equalsIgnoreCase("X")) {
+                return R.color.X;
+            }
+            return 0;
         }
     }
 
