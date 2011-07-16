@@ -18,6 +18,7 @@ import greendroid.widget.GDActionBarItem.Type;
 import sg.rp.geeks.leoapp.adapter.SectionedAdapter;
 import sg.rp.geeks.leoapp.connection.BaseServer;
 import sg.rp.geeks.leoapp.connection.PyroServer;
+import sg.rp.geeks.leoapp.item.GradeSlot;
 import sg.rp.geeks.leoapp.item.ModuleSlot;
 import sg.rp.geeks.leoapp.item.UTSlot;
 import sg.rp.geeks.leoapp.widget.TitleFlowIndicator;
@@ -41,13 +42,16 @@ public class TimetableActivity extends GDActivity
 
     private PyroServer server;
 
+    private ArrayList<GradeSlot> mRecentGrades;
     private ArrayList<ModuleSlot> mClasses;
     private ArrayList<UTSlot> mUTs;
 
     private TimetableViewsAdapter mTimetableViewsAdapter;
 
+    private SectionedAdapter mSectionedRecentGradesAdapter;
     private SectionedAdapter mSectionedClassesAdapter;
     private SectionedAdapter mSectionedUTsAdapter;
+
     private BaseAdapter[] mAdapters = new BaseAdapter[3];
 
     private SharedPreferences prefs;
@@ -80,6 +84,20 @@ public class TimetableActivity extends GDActivity
         // initialize objects
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
+        mRecentGrades = new ArrayList<GradeSlot>();
+        mSectionedRecentGradesAdapter = new SectionedAdapter() {
+            protected View getHeaderView(String caption, int index, int count, View convertView, ViewGroup parent) {
+                TextView result = (TextView) convertView;
+
+                if (convertView == null) {
+                    result = (TextView) getLayoutInflater().inflate(R.layout.list_section_header, null);
+                }
+                result.setText(caption);
+
+                return(result);
+            }
+        };
+
         mClasses = new ArrayList<ModuleSlot>();
         mSectionedClassesAdapter = new SectionedAdapter() {
             protected View getHeaderView(String caption, int index, int count, View convertView, ViewGroup parent) {
@@ -108,7 +126,7 @@ public class TimetableActivity extends GDActivity
             }
         };
 
-        mAdapters[0] = mSectionedUTsAdapter;
+        mAdapters[0] = mSectionedRecentGradesAdapter;
         mAdapters[1] = mSectionedClassesAdapter;
         mAdapters[2] = mSectionedUTsAdapter;
 
@@ -192,6 +210,7 @@ public class TimetableActivity extends GDActivity
     public void reloadData() {
         final LoaderActionBarItem loaderItem = ((LoaderActionBarItem) getGDActionBar().getItem(0));
         loaderItem.setLoading(true);
+
 
         server.getClasses(new BaseServer.Delegate() {
             public void connectionError(String error) {
@@ -314,7 +333,81 @@ public class TimetableActivity extends GDActivity
             }
         });
 
+        server.getRecentGrades(new BaseServer.Delegate() {
+            public void connectionError(String error) {
 
+            }
+
+            public void connectionEnded(String error, Object object) {
+                if (object instanceof ArrayList) {
+                    mRecentGrades = (ArrayList<GradeSlot>) object;
+                    ArrayList<String> problems_title = new ArrayList<String>();
+                    ArrayList<Grade> grades = new ArrayList<Grade>();
+                    for (GradeSlot m : mRecentGrades) {
+                        Grade grade;
+                        if (!problems_title.contains("Problem "+m.getProblem())) {
+                            grade = new Grade();
+                            grade.name = "Problem "+m.getProblem();
+                            grades.add(grade);
+                            problems_title.add(grade.name);
+                            Log.d("Regulus", "Added Problem For Grades "+m.getProblem());
+                        } else {
+                            grade = grades.get(problems_title.indexOf("Problem " + m.getProblem()));
+                        }
+
+                        Log.d("Regulus", "Added To Problem For Grades "+grade.name+": "+m.getModuleCode());
+                        grade.grades.add(m);
+                    }
+
+                    mSectionedRecentGradesAdapter.removeAllSections();
+                    for (Grade grade : grades) {
+                        Log.d("Regulus", "Added To Adapter: "+grade.name);
+                        GradesAdapter gradesAdapter = new GradesAdapter(grade.grades);
+                        mSectionedRecentGradesAdapter.addSection(grade.name, gradesAdapter);
+                    }
+
+                    mSectionedRecentGradesAdapter.notifyDataSetChanged();
+                    mTimetableViewsAdapter.notifyDataSetChanged();
+                }
+
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        loaderItem.setLoading(false);
+                    }
+                }, 2000);
+            }
+        });
+    }
+
+    private class Grade {
+        String name;
+        ArrayList<GradeSlot> grades = new ArrayList<GradeSlot>();
+    }
+
+    public class GradesAdapter extends ArrayAdapter<GradeSlot> {
+        ArrayList<GradeSlot> items;
+
+        public GradesAdapter(Context context, int textViewResourceId, ArrayList<GradeSlot> items) {
+            super(context, textViewResourceId, items);
+        }
+
+        public GradesAdapter(ArrayList<GradeSlot> items) {
+            this(TimetableActivity.this, R.layout.grade_list_item, items);
+            this.items = items;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.grade_list_item, null);
+            }
+
+            GradeSlot gradeSlot = items.get(position);
+
+            ((TextView) convertView.findViewById(R.id.title)).setText(gradeSlot.getModuleCode());
+            ((TextView) convertView.findViewById(R.id.grade_holder)).setText(gradeSlot.getGrade());
+
+            return convertView;
+        }
     }
 
     private class Problem {
@@ -390,7 +483,7 @@ public class TimetableActivity extends GDActivity
     }
 
     public class TimetableViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"Grades", "Classes", "UT Schedule"};
+        private final String[] titles = {"Recent Grades", "Classes", "UT Schedule"};
 
         public int getCount() {
             return titles.length;
