@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PyroServer extends BaseServer implements BaseServer.BaseRequest {
-    public String SERVER_BASE_URL = "http://emoosx.me/regulus/api/";
+    public String SERVER_BASE_URL = "https://cb595df1.dotcloud.com/api/";
 
     private String username;
     private String password;
@@ -97,7 +97,7 @@ public class PyroServer extends BaseServer implements BaseServer.BaseRequest {
                     try {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             final JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            timetable.add(new UTSlot(jsonObject.getString("ut_no"), jsonObject.getString("ut_name"), jsonObject.getString("date"), jsonObject.getString("venue"), jsonObject.getString("time")));
+                            timetable.add(new UTSlot(jsonObject.getString("ut_no"), jsonObject.getString("module_name"), jsonObject.getString("date"), jsonObject.getString("venue"), jsonObject.getString("time")));
                         }
 
                         mHandler.post(new Runnable() {
@@ -127,7 +127,7 @@ public class PyroServer extends BaseServer implements BaseServer.BaseRequest {
                     try {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             final JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            grades.add(new GradeSlot(jsonObject.getString("module_code"), jsonObject.getString("problem"), jsonObject.getString("grade")));
+                            grades.add(new GradeSlot(jsonObject.getString("module_name"), jsonObject.getString("problem"), jsonObject.getString("grade")));
                         }
                         mHandler.post(new Runnable() {
                             public void run() {
