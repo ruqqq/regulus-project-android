@@ -290,7 +290,7 @@ public class TimetableActivity extends GDActivity {
 
                 mHandler.postDelayed(new Runnable() {
                     public void run() {
-                        loaderItem.setLoading(false);
+                        //loaderItem.setLoading(false);
                     }
                 }, 2000);
             }
@@ -335,53 +335,7 @@ public class TimetableActivity extends GDActivity {
 
                 mHandler.postDelayed(new Runnable() {
                     public void run() {
-                        loaderItem.setLoading(false);
-                    }
-                }, 2000);
-            }
-        });
-
-        server.getRecentGrades(new BaseServer.Delegate() {
-            public void connectionError(String error) {
-
-            }
-
-            public void connectionEnded(String error, Object object) {
-                if (object instanceof ArrayList) {
-                    mRecentGrades = (ArrayList<GradeSlot>) object;
-                    ArrayList<String> problems_title = new ArrayList<String>();
-                    ArrayList<Grade> grades = new ArrayList<Grade>();
-                    Collections.reverse(mRecentGrades);
-                    for (GradeSlot m : mRecentGrades) {
-                        Grade grade;
-                        if (!problems_title.contains("Problem " + m.getProblem())) {
-                            grade = new Grade();
-                            grade.name = "Problem " + m.getProblem();
-                            grades.add(grade);
-                            problems_title.add(grade.name);
-                            Log.d("Regulus", "Added Problem For Grades " + m.getProblem());
-                        } else {
-                            grade = grades.get(problems_title.indexOf("Problem " + m.getProblem()));
-                        }
-
-                        Log.d("Regulus", "Added To Problem For Grades " + grade.name + ": " + m.getModuleCode());
-                        grade.grades.add(m);
-                    }
-
-                    mSectionedRecentGradesAdapter.removeAllSections();
-                    for (Grade grade : grades) {
-                        Log.d("Regulus", "Added To Adapter: " + grade.name);
-                        GradesAdapter gradesAdapter = new GradesAdapter(grade.grades);
-                        mSectionedRecentGradesAdapter.addSection(grade.name, gradesAdapter);
-                    }
-
-                    mSectionedRecentGradesAdapter.notifyDataSetChanged();
-                    mTimetableViewsAdapter.notifyDataSetChanged();
-                }
-
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        loaderItem.setLoading(false);
+                        //loaderItem.setLoading(false);
                     }
                 }, 2000);
             }
@@ -427,6 +381,54 @@ public class TimetableActivity extends GDActivity {
 
                 mHandler.postDelayed(new Runnable() {
                     public void run() {
+                        //loaderItem.setLoading(false);
+                    }
+                }, 2000);
+            }
+        });
+
+        server.getRecentGrades(new BaseServer.Delegate() {
+            public void connectionError(String error) {
+
+            }
+
+            public void connectionEnded(String error, Object object) {
+                if (object instanceof ArrayList) {
+                    mRecentGrades = (ArrayList<GradeSlot>) object;
+                    ArrayList<String> problems_title = new ArrayList<String>();
+                    ArrayList<Grade> grades = new ArrayList<Grade>();
+                    Collections.reverse(mRecentGrades);
+                    for (GradeSlot m : mRecentGrades) {
+                        Grade grade;
+                        if (!problems_title.contains("Problem " + m.getProblem())) {
+                            grade = new Grade();
+                            grade.name = "Problem " + m.getProblem();
+                            grades.add(grade);
+                            problems_title.add(grade.name);
+                            Log.d("Regulus", "Added Problem For Grades " + m.getProblem());
+                        } else {
+                            grade = grades.get(problems_title.indexOf("Problem " + m.getProblem()));
+                        }
+
+                        Log.d("Regulus", "Added To Problem For Grades " + grade.name + ": " + m.getModuleCode());
+                        grade.grades.add(m);
+                    }
+
+                    mSectionedRecentGradesAdapter.removeAllSections();
+                    for (Grade grade : grades) {
+                        Log.d("Regulus", "Added To Adapter: " + grade.name);
+                        GradesAdapter gradesAdapter = new GradesAdapter(grade.grades);
+                        mSectionedRecentGradesAdapter.addSection(grade.name, gradesAdapter);
+                    }
+
+                    mSectionedRecentGradesAdapter.notifyDataSetChanged();
+                    mTimetableViewsAdapter.notifyDataSetChanged();
+                }
+
+                mHandler.postDelayed(new Runnable() {
+                    public void run() {
+                        //Using a temporary solution of setting the loader item only when grades are loaded
+                        //Grades are usually the slowest to load since it has to get the module name
                         loaderItem.setLoading(false);
                     }
                 }, 2000);
