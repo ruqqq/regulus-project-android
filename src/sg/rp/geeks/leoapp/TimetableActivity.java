@@ -9,12 +9,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import greendroid.app.GDActivity;
 import greendroid.widget.GDActionBarItem;
-import greendroid.widget.LoaderActionBarItem;
 import greendroid.widget.GDActionBarItem.Type;
+import greendroid.widget.LoaderActionBarItem;
 import sg.rp.geeks.leoapp.adapter.SectionedAdapter;
 import sg.rp.geeks.leoapp.connection.BaseServer;
 import sg.rp.geeks.leoapp.connection.PyroServer;
@@ -26,7 +29,6 @@ import sg.rp.geeks.leoapp.widget.TitleProvider;
 import sg.rp.geeks.leoapp.widget.ViewFlow;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class TimetableActivity extends GDActivity {
@@ -341,7 +343,7 @@ public class TimetableActivity extends GDActivity {
             }
         });
 
-        server.getRecetUTGrades(new BaseServer.Delegate() {
+        server.getRecentUTGrades(new BaseServer.Delegate() {
             public void connectionError(String error) {
 
             }

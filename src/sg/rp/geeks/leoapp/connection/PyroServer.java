@@ -146,7 +146,7 @@ public class PyroServer extends BaseServer implements BaseServer.BaseRequest {
         }).start();
     }
 
-    public void getRecetUTGrades(final Delegate delegate) {
+    public void getRecentUTGrades(final Delegate delegate) {
         new Thread(new Runnable() {
             public void run() {
                 JSONArray jsonArray = doPost(getGradesUrl("ut"), delegate);
