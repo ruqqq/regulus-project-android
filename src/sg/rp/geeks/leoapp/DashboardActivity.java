@@ -22,6 +22,8 @@ public class DashboardActivity extends GDActivity {
         super.onCreate(icicle);
         setGDActionBarContentView(R.layout.dashboard_activity);
 
+
+
         ArrayList<DashboardItem> dashboardItems = new ArrayList<DashboardItem>();
         dashboardItems.add(new DashboardItem("Timetable", getResources().getDrawable(R.drawable.schedule_icon)));
         dashboardItems.add(new DashboardItem("Profile", getResources().getDrawable(R.drawable.profile_icon)));

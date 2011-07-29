@@ -21,7 +21,6 @@ import greendroid.widget.LoaderActionBarItem;
 import sg.rp.geeks.leoapp.adapter.SectionedAdapter;
 import sg.rp.geeks.leoapp.connection.BaseServer;
 import sg.rp.geeks.leoapp.connection.PyroServer;
-import sg.rp.geeks.leoapp.item.GradeSlot;
 import sg.rp.geeks.leoapp.item.ModuleSlot;
 import sg.rp.geeks.leoapp.item.UTSlot;
 import sg.rp.geeks.leoapp.widget.TitleFlowIndicator;
@@ -44,19 +43,15 @@ public class TimetableActivity extends GDActivity {
 
     private PyroServer server;
 
-    private ArrayList<GradeSlot> mRecentUTGrades;
-    private ArrayList<GradeSlot> mRecentGrades;
     private ArrayList<ModuleSlot> mClasses;
     private ArrayList<UTSlot> mUTs;
 
     private TimetableViewsAdapter mTimetableViewsAdapter;
 
-    private SectionedAdapter mSectionedRecentGradesAdapter;
-    private SectionedAdapter mSectionedRecentUTGradesAdapter;
     private SectionedAdapter mSectionedClassesAdapter;
     private SectionedAdapter mSectionedUTsAdapter;
 
-    private BaseAdapter[] mAdapters = new BaseAdapter[4];
+    private BaseAdapter[] mAdapters = new BaseAdapter[2];
 
     private SharedPreferences prefs;
     String username = "", password = "";
@@ -72,40 +67,9 @@ public class TimetableActivity extends GDActivity {
         setGDActionBarContentView(R.layout.timetable_activity);
         addActionBarItem(Type.Refresh, R.id.action_bar_refresh);
 
-        // dirty way: hide home button
-        getGDActionBar().findViewById(R.id.gd_action_bar_home_item).setVisibility(View.GONE);
-        ((ViewGroup) getGDActionBar().findViewById(R.id.gd_action_bar_home_item).getParent()).getChildAt(1).setVisibility(View.GONE);
 
         // initialize objects
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-        mRecentGrades = new ArrayList<GradeSlot>();
-        mSectionedRecentGradesAdapter = new SectionedAdapter() {
-            protected View getHeaderView(String caption, int index, int count, View convertView, ViewGroup parent) {
-                TextView result = (TextView) convertView;
-
-                if (convertView == null) {
-                    result = (TextView) getLayoutInflater().inflate(R.layout.list_section_header, null);
-                }
-                result.setText(caption);
-
-                return (result);
-            }
-        };
-
-        mRecentUTGrades = new ArrayList<GradeSlot>();
-        mSectionedRecentUTGradesAdapter = new SectionedAdapter() {
-            protected View getHeaderView(String caption, int index, int count, View convertView, ViewGroup parent) {
-                TextView result = (TextView) convertView;
-
-                if (convertView == null) {
-                    result = (TextView) getLayoutInflater().inflate(R.layout.list_section_header, null);
-                }
-                result.setText(caption);
-
-                return (result);
-            }
-        };
 
         mClasses = new ArrayList<ModuleSlot>();
         mSectionedClassesAdapter = new SectionedAdapter() {
@@ -135,10 +99,8 @@ public class TimetableActivity extends GDActivity {
             }
         };
 
-        mAdapters[0] = mSectionedRecentUTGradesAdapter;
-        mAdapters[1] = mSectionedRecentGradesAdapter;
-        mAdapters[2] = mSectionedClassesAdapter;
-        mAdapters[3] = mSectionedUTsAdapter;
+        mAdapters[0] = mSectionedClassesAdapter;
+        mAdapters[1] = mSectionedUTsAdapter;
 
         vfTimetable = (ViewFlow) findViewById(R.id.vf_timetable);
         mTimetableViewsAdapter = new TimetableViewsAdapter();
@@ -148,7 +110,7 @@ public class TimetableActivity extends GDActivity {
         indicator.setTitleProvider(mTimetableViewsAdapter);
         vfTimetable.setFlowIndicator(indicator);
 
-        vfTimetable.setSelection(2); //Select the middle tab
+        vfTimetable.setSelection(0); //Select the Class Timetable tab
     }
 
     @Override
@@ -342,135 +304,8 @@ public class TimetableActivity extends GDActivity {
                 }, 2000);
             }
         });
-
-        server.getRecentUTGrades(new BaseServer.Delegate() {
-            public void connectionError(String error) {
-
-            }
-
-            public void connectionEnded(String error, Object object) {
-                if (object instanceof ArrayList) {
-                    mRecentUTGrades = (ArrayList<GradeSlot>) object;
-                    ArrayList<String> problems_title = new ArrayList<String>();
-                    ArrayList<Grade> grades = new ArrayList<Grade>();
-                    Collections.reverse(mRecentUTGrades);
-                    for (GradeSlot m : mRecentUTGrades) {
-                        Grade grade;
-                        if (!problems_title.contains("Understanding Test " + m.getProblem())) {
-                            grade = new Grade();
-                            grade.name = "Understanding Test " + m.getProblem();
-                            grades.add(grade);
-                            problems_title.add(grade.name);
-                            Log.d("Regulus", "Added UT For Grades " + m.getProblem());
-                        } else {
-                            grade = grades.get(problems_title.indexOf("Understanding Test " + m.getProblem()));
-                        }
-
-                        Log.d("Regulus", "Added To UT For Grades " + grade.name + ": " + m.getModuleCode());
-                        grade.grades.add(m);
-                    }
-
-                    mSectionedRecentUTGradesAdapter.removeAllSections();
-                    for (Grade grade : grades) {
-                        Log.d("Regulus", "Added To Adapter: " + grade.name);
-                        GradesAdapter gradesAdapter = new GradesAdapter(grade.grades);
-                        mSectionedRecentUTGradesAdapter.addSection(grade.name, gradesAdapter);
-                    }
-
-                    mSectionedRecentUTGradesAdapter.notifyDataSetChanged();
-                    mTimetableViewsAdapter.notifyDataSetChanged();
-                }
-
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        //loaderItem.setLoading(false);
-                    }
-                }, 2000);
-            }
-        });
-
-        server.getRecentGrades(new BaseServer.Delegate() {
-            public void connectionError(String error) {
-
-            }
-
-            public void connectionEnded(String error, Object object) {
-                if (object instanceof ArrayList) {
-                    mRecentGrades = (ArrayList<GradeSlot>) object;
-                    ArrayList<String> problems_title = new ArrayList<String>();
-                    ArrayList<Grade> grades = new ArrayList<Grade>();
-                    Collections.reverse(mRecentGrades);
-                    for (GradeSlot m : mRecentGrades) {
-                        Grade grade;
-                        if (!problems_title.contains("Problem " + m.getProblem())) {
-                            grade = new Grade();
-                            grade.name = "Problem " + m.getProblem();
-                            grades.add(grade);
-                            problems_title.add(grade.name);
-                            Log.d("Regulus", "Added Problem For Grades " + m.getProblem());
-                        } else {
-                            grade = grades.get(problems_title.indexOf("Problem " + m.getProblem()));
-                        }
-
-                        Log.d("Regulus", "Added To Problem For Grades " + grade.name + ": " + m.getModuleCode());
-                        grade.grades.add(m);
-                    }
-
-                    mSectionedRecentGradesAdapter.removeAllSections();
-                    for (Grade grade : grades) {
-                        Log.d("Regulus", "Added To Adapter: " + grade.name);
-                        GradesAdapter gradesAdapter = new GradesAdapter(grade.grades);
-                        mSectionedRecentGradesAdapter.addSection(grade.name, gradesAdapter);
-                    }
-
-                    mSectionedRecentGradesAdapter.notifyDataSetChanged();
-                    mTimetableViewsAdapter.notifyDataSetChanged();
-                }
-
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        //Using a temporary solution of setting the loader item only when grades are loaded
-                        //Grades are usually the slowest to load since it has to get the module name
-                        loaderItem.setLoading(false);
-                    }
-                }, 2000);
-            }
-        });
-
-
     }
 
-    private class Grade {
-        String name;
-        ArrayList<GradeSlot> grades = new ArrayList<GradeSlot>();
-    }
-
-    public class GradesAdapter extends ArrayAdapter<GradeSlot> {
-        ArrayList<GradeSlot> items;
-
-        public GradesAdapter(Context context, int textViewResourceId, ArrayList<GradeSlot> items) {
-            super(context, textViewResourceId, items);
-        }
-
-        public GradesAdapter(ArrayList<GradeSlot> items) {
-            this(TimetableActivity.this, R.layout.grade_list_item, items);
-            this.items = items;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.grade_list_item, null);
-            }
-
-            GradeSlot gradeSlot = items.get(position);
-
-            ((TextView) convertView.findViewById(R.id.title)).setText(gradeSlot.getModuleCode());
-            ((TextView) convertView.findViewById(R.id.grade_holder)).setTextColor(getResources().getColor(mapGradeToColor(gradeSlot.getGrade())));
-            ((TextView) convertView.findViewById(R.id.grade_holder)).setText(gradeSlot.getGrade());
-
-            return convertView;
-        }
-    }
 
     private class Problem {
         String name;
@@ -545,7 +380,7 @@ public class TimetableActivity extends GDActivity {
     }
 
     public class TimetableViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"UT Grades", "Daily Grades", "Classes", "UT Schedule"};
+        private final String[] titles = {"Classes","UT Schedule"};
 
         public int getCount() {
             return titles.length;
@@ -595,40 +430,5 @@ public class TimetableActivity extends GDActivity {
             return String.valueOf(Integer.parseInt(hour)-12) + ":" + temp[1];
         }
         return time;
-    }
-
-    //Helper method for changing colors
-    private int mapGradeToColor(String grade) {
-        if (grade.equalsIgnoreCase("A")) {
-            return R.color.A;
-        }
-        if (grade.equalsIgnoreCase("B")) {
-            return R.color.B;
-        }
-        if (grade.equalsIgnoreCase("B+")) {
-            return R.color.Bplus;
-        }
-        if (grade.equalsIgnoreCase("C")) {
-            return R.color.C;
-        }
-        if (grade.equalsIgnoreCase("C+")) {
-            return R.color.Cplus;
-        }
-        if (grade.equalsIgnoreCase("D")) {
-            return R.color.D;
-        }
-        if (grade.equalsIgnoreCase("D+")) {
-            return R.color.Dplus;
-        }
-        if (grade.equalsIgnoreCase("E")) {
-            return R.color.E;
-        }
-        if (grade.equalsIgnoreCase("F")) {
-            return R.color.F;
-        }
-        if (grade.equalsIgnoreCase("X")) {
-            return R.color.X;
-        }
-        return 0;
     }
 }

@@ -129,9 +129,6 @@ public class GradesActivity extends GDActivity {
                 final LoaderActionBarItem loaderItem = (LoaderActionBarItem) item;
                 reloadData();
                 break;
-             case R.id.action_bar_home_item:
-                 Intent i = new Intent(GradesActivity.this, DashboardActivity.class);
-                 startActivity(i);
             default:
                 return super.onHandleActionBarItemClick(item, position);
         }

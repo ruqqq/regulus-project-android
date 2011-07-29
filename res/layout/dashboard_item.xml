@@ -6,7 +6,8 @@
               android:paddingTop="20dp"
               android:paddingBottom="20dp"
               android:paddingLeft="10dp"
-              android:paddingRight="10dp">
+              android:paddingRight="10dp"
+              >
 
     <ImageView android:id="@+id/iv_dashboard_icon"
                android:layout_width="fill_parent"
