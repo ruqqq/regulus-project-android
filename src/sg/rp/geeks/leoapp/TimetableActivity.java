@@ -99,8 +99,8 @@ public class TimetableActivity extends GDActivity {
             }
         };
 
-        mAdapters[0] = mSectionedClassesAdapter;
-        mAdapters[1] = mSectionedUTsAdapter;
+        mAdapters[1] = mSectionedClassesAdapter;
+        mAdapters[0] = mSectionedUTsAdapter;
 
         vfTimetable = (ViewFlow) findViewById(R.id.vf_timetable);
         mTimetableViewsAdapter = new TimetableViewsAdapter();
@@ -188,6 +188,7 @@ public class TimetableActivity extends GDActivity {
             public void connectionError(String error) {
                 mHandler.post(new Runnable() {
                     public void run() {
+                        /*
                         new AlertDialog.Builder(TimetableActivity.this)
                                 .setTitle("Error")
                                 .setMessage("The server is down. Please try again later.")
@@ -196,6 +197,7 @@ public class TimetableActivity extends GDActivity {
                                     }
                                 })
                                 .show();
+                        */
                     }
                 });
 
@@ -380,7 +382,7 @@ public class TimetableActivity extends GDActivity {
     }
 
     public class TimetableViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"Classes","UT Schedule"};
+        private final String[] titles = {"UT","Classes"};
 
         public int getCount() {
             return titles.length;

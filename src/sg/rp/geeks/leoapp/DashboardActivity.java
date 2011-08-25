@@ -22,15 +22,11 @@ public class DashboardActivity extends GDActivity {
         super.onCreate(icicle);
         setGDActionBarContentView(R.layout.dashboard_activity);
 
-
-
         ArrayList<DashboardItem> dashboardItems = new ArrayList<DashboardItem>();
         dashboardItems.add(new DashboardItem("Timetable", getResources().getDrawable(R.drawable.schedule_icon)));
         dashboardItems.add(new DashboardItem("Profile", getResources().getDrawable(R.drawable.profile_icon)));
         dashboardItems.add(new DashboardItem("Recent Grades", getResources().getDrawable(R.drawable.grades_icon)));
         dashboardItems.add(new DashboardItem("Module Summary", getResources().getDrawable(R.drawable.module_summary_icon)));
-
-
 
         this.mGridView = (GridView)findViewById(R.id.gv_dashboard);
         this.mDashboardAdapter = new DashboardAdapter(this, dashboardItems);

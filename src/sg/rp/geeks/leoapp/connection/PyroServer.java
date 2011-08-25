@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PyroServer extends BaseServer implements BaseServer.BaseRequest {
-    public String SERVER_BASE_URL = "https://cb595df1.dotcloud.com/api/";
+    public String SERVER_BASE_URL = "http://leoapp.definerp.com/index.php/api/";
 
     private String username;
     private String password;

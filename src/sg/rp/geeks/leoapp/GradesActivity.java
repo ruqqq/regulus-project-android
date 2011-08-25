@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import greendroid.app.GDActivity;
-import greendroid.widget.GDActionBarItem;
 import greendroid.widget.LoaderActionBarItem;
 import sg.rp.geeks.leoapp.adapter.SectionedAdapter;
 import sg.rp.geeks.leoapp.connection.BaseServer;
@@ -22,6 +21,7 @@ import sg.rp.geeks.leoapp.item.GradeSlot;
 import sg.rp.geeks.leoapp.widget.TitleFlowIndicator;
 import sg.rp.geeks.leoapp.widget.TitleProvider;
 import sg.rp.geeks.leoapp.widget.ViewFlow;
+import greendroid.widget.GDActionBarItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -330,7 +330,7 @@ public class GradesActivity extends GDActivity {
 
 
     public class GradeViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"Daily Grades", "UT Grades"};
+        private final String[] titles = {"Daily", "UT"};
 
         public int getCount() {
             return titles.length;
