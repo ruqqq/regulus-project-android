@@ -5,5 +5,7 @@
 		<item name="gdActionBarDividerDrawable">@drawable/action_bar_divider</item>
 		<item name="gdActionBarDividerWidth">1px</item>
 		<item name="gdActionBarApplicationDrawable">@drawable/header_title</item>
+        <item name="gdActionBarHomeDrawable">@drawable/action_bar_home</item>
+
 	</style>
 </resources>

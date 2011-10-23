@@ -53,7 +53,6 @@ public class TimetableActivity extends GDActivity {
 
     private BaseAdapter[] mAdapters = new BaseAdapter[2];
 
-    private SharedPreferences prefs;
     String username = "", password = "";
 
     /**
@@ -66,10 +65,6 @@ public class TimetableActivity extends GDActivity {
         // initialize views
         setGDActionBarContentView(R.layout.timetable_activity);
         addActionBarItem(Type.Refresh, R.id.action_bar_refresh);
-
-
-        // initialize objects
-        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         mClasses = new ArrayList<ModuleSlot>();
         mSectionedClassesAdapter = new SectionedAdapter() {
@@ -116,6 +111,7 @@ public class TimetableActivity extends GDActivity {
     @Override
     public void onResume() {
         super.onResume();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         String prefUsername = prefs.getString("pref_key_rp_username", "");
         String prefPassword = prefs.getString("pref_key_rp_password", "");

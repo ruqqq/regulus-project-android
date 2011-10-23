@@ -7,4 +7,5 @@ public class LeoApp extends GDApplication {
     public Class<?> getHomeActivityClass() {
         return DashboardActivity.class;
     }
+
 }

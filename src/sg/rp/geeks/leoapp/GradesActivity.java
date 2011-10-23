@@ -45,8 +45,6 @@ public class GradesActivity extends GDActivity {
 
     private BaseAdapter[] mAdapters = new BaseAdapter[2];
 
-    private SharedPreferences prefs;
-
     String username = "", password = "";
 
     @Override
@@ -59,7 +57,6 @@ public class GradesActivity extends GDActivity {
 
 
         // initialize objects
-        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         mRecentGrades = new ArrayList<GradeSlot>();
         mSectionedRecentGradesAdapter = new SectionedAdapter() {
@@ -103,6 +100,8 @@ public class GradesActivity extends GDActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         String prefUsername = prefs.getString("pref_key_rp_username", "");
         String prefPassword = prefs.getString("pref_key_rp_password", "");

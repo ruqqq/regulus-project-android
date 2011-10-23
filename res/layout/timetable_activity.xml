@@ -18,15 +18,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
 			app:footerLineHeight="0dp"
-			app:footerTriangleHeight="6dp"
+			app:footerTriangleHeight="5dp"
             app:footerColor="#ffffffff"
             app:textColor="#ff0f630e"
             app:selectedColor="#ffffffff"
             app:selectedBold="true"
             app:selectedSize="11dp"
             app:textSize="10dp"
-            app:titlePadding="10dp"
-                app:clipPadding="5dp"/>
+            app:clipPadding="5dp"/>
 	</LinearLayout>
 	<org.taptwo.android.widget.ViewFlow
 		android:duplicateParentState="true"
