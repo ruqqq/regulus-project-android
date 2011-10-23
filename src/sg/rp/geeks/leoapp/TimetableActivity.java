@@ -18,14 +18,14 @@ import greendroid.app.GDActivity;
 import greendroid.widget.GDActionBarItem;
 import greendroid.widget.GDActionBarItem.Type;
 import greendroid.widget.LoaderActionBarItem;
+import org.taptwo.android.widget.TitleFlowIndicator;
+import org.taptwo.android.widget.TitleProvider;
+import org.taptwo.android.widget.ViewFlow;
 import sg.rp.geeks.leoapp.adapter.SectionedAdapter;
 import sg.rp.geeks.leoapp.connection.BaseServer;
 import sg.rp.geeks.leoapp.connection.PyroServer;
 import sg.rp.geeks.leoapp.item.ModuleSlot;
 import sg.rp.geeks.leoapp.item.UTSlot;
-import sg.rp.geeks.leoapp.widget.TitleFlowIndicator;
-import sg.rp.geeks.leoapp.widget.TitleProvider;
-import sg.rp.geeks.leoapp.widget.ViewFlow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -382,7 +382,7 @@ public class TimetableActivity extends GDActivity {
     }
 
     public class TimetableViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"Daily", "Tests"};
+        private final String[] titles = {"Daily", "UT"};
 
         public int getCount() {
             return titles.length;

@@ -14,30 +14,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10f3227d-1518-4496-8968-4007d6a3eb32" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/header_title.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../Repos/Android/GreenDroid/GreenDroid/GreenDroid.iml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../Repos/Android/android-viewflow/viewflow/viewflow.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/CircleFlowIndicator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/FlowIndicator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleFlowIndicator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/ViewFlow.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Regulus-project-android.iml" afterPath="$PROJECT_DIR$/Regulus-project-android.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default.properties" afterPath="$PROJECT_DIR$/default.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/cyrilmottier/android/greendroid/R.java" afterPath="$PROJECT_DIR$/gen/com/cyrilmottier/android/greendroid/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/sg/rp/geeks/leoapp/R.java" afterPath="$PROJECT_DIR$/gen/sg/rp/geeks/leoapp/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/dashboard_activity.xml" afterPath="$PROJECT_DIR$/res/layout/dashboard_activity.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/timetable_activity.xml" afterPath="$PROJECT_DIR$/res/layout/timetable_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="$PROJECT_DIR$/res/values/attrs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/colors.xml" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/themes.xml" afterPath="$PROJECT_DIR$/res/values/themes.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/DashboardActivity.java" afterPath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/DashboardActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/PreferencesActivity.java" afterPath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/PreferencesActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/GradesActivity.java" afterPath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/GradesActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/TimetableActivity.java" afterPath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/TimetableActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/CircleFlowIndicator.java" afterPath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/CircleFlowIndicator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleFlowIndicator.java" afterPath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleFlowIndicator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/ViewFlow.java" afterPath="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/ViewFlow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../Repos/Android/Android-ViewPagerIndicator/library/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../../Repos/Android/Android-ViewPagerIndicator/library/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../Repos/Android/Android-ViewPagerIndicator/library/default.properties" afterPath="$PROJECT_DIR$/../../../Repos/Android/Android-ViewPagerIndicator/library/default.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../Repos/Android/GreenDroid/GreenDroid/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../../../Repos/Android/GreenDroid/GreenDroid/AndroidManifest.xml" />
@@ -112,28 +102,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FlowIndicator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/FlowIndicator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="63" selection-start="934" selection-end="934" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TitleFlowIndicator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleFlowIndicator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="34" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="timetable_activity.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/timetable_activity.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="28" selection-start="1045" selection-end="1045" vertical-scroll-proportion="0.0">
+            <state line="20" column="41" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -142,8 +114,10 @@
       <file leaf-file-name="GradesActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/GradesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="328" column="120" selection-start="12386" selection-end="12386" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="94" column="44" selection-start="3326" selection-end="3326" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -151,26 +125,10 @@
       <file leaf-file-name="TimetableActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/TimetableActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="384" column="56" selection-start="15245" selection-end="15245" vertical-scroll-proportion="0.035885166">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewFlow.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/ViewFlow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="28" selection-start="728" selection-end="728" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="attrs.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/attrs.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="81" selection-start="1179" selection-end="1179" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="387" column="66" selection-start="15312" selection-end="15312" vertical-scroll-proportion="0.49029127">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -211,8 +169,8 @@
         <option value="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleFlowIndicator.java" />
         <option value="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/FlowIndicator.java" />
         <option value="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/ViewFlow.java" />
-        <option value="$PROJECT_DIR$/res/layout/timetable_activity.xml" />
         <option value="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/GradesActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/timetable_activity.xml" />
         <option value="$PROJECT_DIR$/src/sg/rp/geeks/leoapp/TimetableActivity.java" />
       </list>
     </option>
@@ -228,9 +186,9 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="20" />
-    <option name="y" value="42" />
-    <option name="width" value="1440" />
+    <option name="x" value="-6" />
+    <option name="y" value="22" />
+    <option name="width" value="1449" />
     <option name="height" value="838" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -326,28 +284,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="widget" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regulus-project-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regulus-project-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="leoapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="item" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -411,6 +347,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regulus-project-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regulus-project-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -635,29 +589,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="42" width="1440" height="838" extended-state="0" />
+    <frame x="-6" y="22" width="1449" height="838" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2" sideWeight="0.81739753" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15097052" sideWeight="0.68951046" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32867134" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3104895" sideWeight="0.9685714" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32997844" sideWeight="0.68951046" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32997844" sideWeight="0.67132866" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867134" sideWeight="0.0" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263889" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32785714" sideWeight="0.67132866" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32867134" sideWeight="0.3235714" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32867134" sideWeight="0.67071426" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15097052" sideWeight="0.68951046" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3104895" sideWeight="0.984184" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867134" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -755,74 +709,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="641" selection-end="641" vertical-scroll-proportion="0.067567565">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/CircleFlowIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="71" selection-start="2929" selection-end="2929" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/DashboardActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="29" selection-start="370" selection-end="370" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/FlowIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="63" selection-start="934" selection-end="934" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/TitleFlowIndicator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="34" selection-start="315" selection-end="315" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/timetable_activity.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="28" selection-start="1045" selection-end="1045" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/GradesActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="328" column="120" selection-start="12386" selection-end="12386" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/TimetableActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="384" column="56" selection-start="15245" selection-end="15245" vertical-scroll-proportion="0.035885166">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/widget/ViewFlow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="28" selection-start="728" selection-end="728" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/attrs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="81" selection-start="1179" selection-end="1179" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -831,6 +720,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="81" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/timetable_activity.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="41" selection-start="857" selection-end="857" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/GradesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="44" selection-start="3326" selection-end="3326" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sg/rp/geeks/leoapp/TimetableActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="387" column="66" selection-start="15312" selection-end="15312" vertical-scroll-proportion="0.49029127">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
