@@ -402,6 +402,9 @@ public class TimetableActivity extends GDActivity {
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
                 //lp.setMargins(10, 10, 10, 10);
                 convertView.setLayoutParams(lp);
+
+                convertView.setPadding(15, 15, 15, 15);
+                convertView.invalidate();
             }
 
             Log.d("Regulus", "Assigning " + mAdapters[position]);

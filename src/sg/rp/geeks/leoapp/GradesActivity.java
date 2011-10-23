@@ -349,6 +349,9 @@ public class GradesActivity extends GDActivity {
                 view = new ListView(GradesActivity.this);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
                 view.setLayoutParams(lp);
+
+                view.setPadding(15, 15, 15, 15);
+                view.invalidate();
             }
             Log.d("Regulus", "Assigning " + mAdapters[i]);
             ((ListView)view).setAdapter(mAdapters[i]);
