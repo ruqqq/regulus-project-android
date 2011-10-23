@@ -4,3 +4,4 @@ bin/
 .DS_Store
 Regulus-project-android.iml
 proguard.cfg
+.idea/

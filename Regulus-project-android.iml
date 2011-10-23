@@ -31,6 +31,7 @@
     <orderEntry type="jdk" jdkName="Android 1.6 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="GreenDroid" exported="" />
+    <orderEntry type="module" module-name="viewflow" exported="" />
   </component>
 </module>
 

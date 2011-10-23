@@ -39,9 +39,6 @@
     <breakpoint_rules />
     <ui_properties />
   </component>
-  <component name="DependencyValidationManager">
-    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
-  </component>
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
@@ -197,5 +194,6 @@
     <option name="FORCE_UPDATE" value="false" />
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
 

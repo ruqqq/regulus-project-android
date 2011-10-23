@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../../Repos/Android/GreenDroid/GreenDroid/GreenDroid.iml" filepath="$PROJECT_DIR$/../../../Repos/Android/GreenDroid/GreenDroid/GreenDroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../Repos/Android/GreenDroid/GreenDroid/GreenDroid.iml" filepath="$PROJECT_DIR$/../../../Repos/Android/GreenDroid/GreenDroid/GreenDroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/Regulus-project-android.iml" filepath="$PROJECT_DIR$/Regulus-project-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../Repos/Android/Android-ViewPagerIndicator/library/library.iml" filepath="$PROJECT_DIR$/../../../Repos/Android/Android-ViewPagerIndicator/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../Repos/Android/android-viewflow/viewflow/viewflow.iml" filepath="$PROJECT_DIR$/../../../Repos/Android/android-viewflow/viewflow/viewflow.iml" />
     </modules>
   </component>
 </project>

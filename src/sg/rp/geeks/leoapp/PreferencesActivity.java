@@ -1,13 +1,11 @@
 package sg.rp.geeks.leoapp;
 
-import android.content.*;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.*;
 import android.text.InputType;
-import android.text.method.PasswordTransformationMethod;
-import android.view.inputmethod.InputMethod;
-import android.widget.EditText;
 import android.widget.ListView;
 
 public class PreferencesActivity extends PreferenceActivity {
@@ -96,7 +94,7 @@ public class PreferencesActivity extends PreferenceActivity {
         root.addPreference(catAbout);
 
         Preference prefApplicationVersion = new Preference(this);
-        prefApplicationVersion.setTitle("LeoApp v0.1");
+        prefApplicationVersion.setTitle("LeoApp v1.2");
         prefApplicationVersion.setSummary("©2011 Geeks@RP");
         prefApplicationVersion.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener(){
             public boolean onPreferenceClick(Preference preference) {

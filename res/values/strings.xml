@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LeoApp</string>
+    <string name="timetable">Schedule</string>
+    <string name="recent_grades">Recent Grades</string>
+    <string name="module_summary">Module Summary</string>
+    <string name="profile">My Profile</string>
+
     <string name="app_preferences">Preferences</string>
 </resources>

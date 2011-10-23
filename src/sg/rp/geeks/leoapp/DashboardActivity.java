@@ -23,10 +23,8 @@ public class DashboardActivity extends GDActivity {
         setGDActionBarContentView(R.layout.dashboard_activity);
 
         ArrayList<DashboardItem> dashboardItems = new ArrayList<DashboardItem>();
-        dashboardItems.add(new DashboardItem("Timetable", getResources().getDrawable(R.drawable.schedule_icon)));
-        dashboardItems.add(new DashboardItem("Profile", getResources().getDrawable(R.drawable.profile_icon)));
-        dashboardItems.add(new DashboardItem("Recent Grades", getResources().getDrawable(R.drawable.grades_icon)));
-        dashboardItems.add(new DashboardItem("Module Summary", getResources().getDrawable(R.drawable.module_summary_icon)));
+        dashboardItems.add(new DashboardItem(getResources().getString(R.string.timetable), getResources().getDrawable(R.drawable.schedule_icon)));
+        dashboardItems.add(new DashboardItem(getResources().getString(R.string.recent_grades), getResources().getDrawable(R.drawable.grades_icon)));
 
         this.mGridView = (GridView)findViewById(R.id.gv_dashboard);
         this.mDashboardAdapter = new DashboardAdapter(this, dashboardItems);
@@ -44,15 +42,15 @@ public class DashboardActivity extends GDActivity {
                 case 0:
                     intent.setClass(adapterView.getContext(), TimetableActivity.class);
                     break;
+                //case 1:
+                    //intent.setClass(adapterView.getContext(), ProfileActivity.class);
+                    //break;
                 case 1:
-                    intent.setClass(adapterView.getContext(), ProfileActivity.class);
-                    break;
-                case 2:
                     intent.setClass(adapterView.getContext(), GradesActivity.class);
                     break;
-                case 3:
-                    intent.setClass(adapterView.getContext(), ModuleSummaryActivity.class);
-                    break;
+                //case 3:
+                   //intent.setClass(adapterView.getContext(), ModuleSummaryActivity.class);
+                    //break;
             }
 
             if(intent.getComponent() != null) {

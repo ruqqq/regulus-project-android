@@ -18,12 +18,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-			app:footerLineHeight="0"
-			app:footerTriangleHeight="5"
+			app:footerLineHeight="0dp"
+			app:footerTriangleHeight="5dp"
             app:footerColor="#ffffffff"
             app:textColor="#ff0f630e"
             app:selectedColor="#ffffffff"
-            app:textSize="12" />
+            app:textSize="11dp" />
 	</LinearLayout>
 	<sg.rp.geeks.leoapp.widget.ViewFlow
 		android:duplicateParentState="true"

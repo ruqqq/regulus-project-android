@@ -99,8 +99,8 @@ public class TimetableActivity extends GDActivity {
             }
         };
 
-        mAdapters[1] = mSectionedClassesAdapter;
-        mAdapters[0] = mSectionedUTsAdapter;
+        mAdapters[0] = mSectionedClassesAdapter;
+        mAdapters[1] = mSectionedUTsAdapter;
 
         vfTimetable = (ViewFlow) findViewById(R.id.vf_timetable);
         mTimetableViewsAdapter = new TimetableViewsAdapter();
@@ -382,7 +382,7 @@ public class TimetableActivity extends GDActivity {
     }
 
     public class TimetableViewsAdapter extends BaseAdapter implements TitleProvider {
-        private final String[] titles = {"UT","Classes"};
+        private final String[] titles = {"Daily", "Tests"};
 
         public int getCount() {
             return titles.length;

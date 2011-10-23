@@ -15,15 +15,19 @@
  */
 package sg.rp.geeks.leoapp.widget;
 
+import java.util.ArrayList;
+
+import sg.rp.geeks.leoapp.R;
+
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-import sg.rp.geeks.leoapp.R;
-
-import java.util.ArrayList;
 
 /**
  * A TitleFlowIndicator is a FlowIndicator which displays the title of left view
@@ -34,13 +38,15 @@ import java.util.ArrayList;
  */
 public class TitleFlowIndicator extends TextView implements FlowIndicator {
 
-	private static final int TITLE_PADDING = 10;
+	private static final float TITLE_PADDING = 10.0f;
+	private static final float CLIP_PADDING = 0.0f;
 	private static final int SELECTED_COLOR = 0xFFFFC445;
+	private static final boolean SELECTED_BOLD = false;
 	private static final int TEXT_COLOR = 0xFFAAAAAA;
 	private static final int TEXT_SIZE = 15;
-	private static final int FOOTER_LINE_HEIGHT = 4;
+	private static final float FOOTER_LINE_HEIGHT = 4.0f;
 	private static final int FOOTER_COLOR = 0xFFFFC445;
-	private static final int FOOTER_TRIANGLE_HEIGHT = 10;
+	private static final float FOOTER_TRIANGLE_HEIGHT = 10;
 	private ViewFlow viewFlow;
 	private int currentScroll = 0;
 	private TitleProvider titleProvider = null;
@@ -50,16 +56,20 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 	private Path path;
 	private Paint paintFooterLine;
 	private Paint paintFooterTriangle;
-	private int footerTriangleHeight;
-	private int titlePadding;
-	private int footerLineHeight;
+	private float footerTriangleHeight;
+	private float titlePadding;
+	/**
+	 * Left and right side padding for not active view titles.
+	 */
+	private float clipPadding;
+	private float footerLineHeight;
 
 	/**
 	 * Default constructor
 	 */
 	public TitleFlowIndicator(Context context) {
 		super(context);
-		initDraw(TEXT_COLOR, TEXT_SIZE, SELECTED_COLOR, FOOTER_LINE_HEIGHT, FOOTER_COLOR);
+		initDraw(TEXT_COLOR, TEXT_SIZE, SELECTED_COLOR, SELECTED_BOLD, TEXT_SIZE, FOOTER_LINE_HEIGHT, FOOTER_COLOR);
 	}
 
 	/**
@@ -74,33 +84,35 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TitleFlowIndicator);
 		// Retrieve the colors to be used for this view and apply them.
 		int footerColor = a.getColor(R.styleable.TitleFlowIndicator_footerColor, FOOTER_COLOR);
-		footerLineHeight = a.getInt(R.styleable.TitleFlowIndicator_footerLineHeight, FOOTER_LINE_HEIGHT);
-		footerTriangleHeight = a.getInt(R.styleable.TitleFlowIndicator_footerTriangleHeight, FOOTER_TRIANGLE_HEIGHT);
+		footerLineHeight = a.getDimension(R.styleable.TitleFlowIndicator_footerLineHeight, FOOTER_LINE_HEIGHT);
+		footerTriangleHeight = a.getDimension(R.styleable.TitleFlowIndicator_footerTriangleHeight, FOOTER_TRIANGLE_HEIGHT);
 		int selectedColor = a.getColor(R.styleable.TitleFlowIndicator_selectedColor, SELECTED_COLOR);
+		boolean selectedBold = a.getBoolean(R.styleable.TitleFlowIndicator_selectedColor, SELECTED_BOLD);
 		int textColor = a.getColor(R.styleable.TitleFlowIndicator_textColor, TEXT_COLOR);
-		float textSize = a.getFloat(R.styleable.TitleFlowIndicator_textSize, TEXT_SIZE);
-		titlePadding = a.getInt(R.styleable.TitleFlowIndicator_titlePadding, TITLE_PADDING);
-		initDraw(textColor, textSize, selectedColor, footerLineHeight, footerColor);
+		float textSize = a.getDimension(R.styleable.TitleFlowIndicator_textSize, TEXT_SIZE);
+		float selectedSize = a.getDimension(R.styleable.TitleFlowIndicator_selectedSize, textSize);
+		titlePadding = a.getDimension(R.styleable.TitleFlowIndicator_titlePadding, TITLE_PADDING);
+		clipPadding = a.getDimension(R.styleable.TitleFlowIndicator_clipPadding, CLIP_PADDING);
+		initDraw(textColor, textSize, selectedColor, selectedBold, selectedSize, footerLineHeight, footerColor);
 	}
 
 	/**
 	 * Initialize draw objects
 	 */
-	private void initDraw(int textColor, float textSize, int selectedColor, int footerLineHeight, int footerColor) {
+	private void initDraw(int textColor, float textSize, int selectedColor, boolean selectedBold, float selectedSize, float footerLineHeight, int footerColor) {
 		paintText = new Paint();
 		paintText.setColor(textColor);
 		paintText.setTextSize(textSize);
-        paintText.setTypeface(Typeface.DEFAULT_BOLD);
 		paintText.setAntiAlias(true);
 		paintSelected = new Paint();
 		paintSelected.setColor(selectedColor);
-		paintSelected.setTextSize(textSize);
-        paintSelected.setTypeface(Typeface.DEFAULT_BOLD);
+		paintSelected.setTextSize(selectedSize);
+		paintSelected.setFakeBoldText(selectedBold);
 		paintSelected.setAntiAlias(true);
 		paintFooterLine = new Paint();
 		paintFooterLine.setStyle(Paint.Style.FILL_AND_STROKE);
 		paintFooterLine.setStrokeWidth(footerLineHeight);
-		paintFooterLine.setColor(FOOTER_COLOR);
+		paintFooterLine.setColor(footerColor);
 		paintFooterTriangle = new Paint();
 		paintFooterTriangle.setStyle(Paint.Style.FILL_AND_STROKE);
 		paintFooterTriangle.setColor(footerColor);
@@ -124,15 +136,13 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 		// Verify if the current view must be clipped to the screen
 		Rect curViewBound = bounds.get(currentPosition);
 		int curViewWidth = curViewBound.right - curViewBound.left;
-		if (curViewBound.left < 10) {
+		if (curViewBound.left < 0) {
 			// Try to clip to the screen (left side)
-			curViewBound.left = 10;
-			curViewBound.right = curViewWidth - 10;
+			clipViewOnTheLeft(curViewBound, curViewWidth);
 		}
 		if (curViewBound.right > getLeft() + getWidth()) {
 			// Try to clip to the screen (right side)
-			curViewBound.right = getLeft() + getWidth() - 10;
-			curViewBound.left = curViewBound.right - curViewWidth + 10;
+			clipViewOnTheRight(curViewBound, curViewWidth);
 		}
 		
 		// Left views starting from the current position
@@ -141,16 +151,15 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 				Rect bound = bounds.get(iLoop);
 				int w = bound.right - bound.left;
 				// Si left side is outside the screen
-				if (bound.left < 10) {
+				if (bound.left < 0) {
 					// Try to clip to the screen (left side)
-					bound.left = 10;
-					bound.right = w;
+					 clipViewOnTheLeft(bound, w);
 					// Except if there's an intersection with the right view
 					if (iLoop < count - 1 && currentPosition != iLoop) {
 						Rect rightBound = bounds.get(iLoop + 1);
 						// Intersection
 						if (bound.right + TITLE_PADDING > rightBound.left) {
-							bound.left = rightBound.left - (w + titlePadding);
+							bound.left = rightBound.left - (w + (int)titlePadding);
 						}
 					}
 				}
@@ -164,14 +173,13 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 				// If right side is outside the screen
 				if (bound.right > getLeft() + getWidth()) {
 					// Try to clip to the screen (right side)
-					bound.right = getLeft() + getWidth();
-					bound.left = bound.right - w;
+					clipViewOnTheRight(bound, w);
 					// Except if there's an intersection with the left view
 					if (iLoop > 0 && currentPosition != iLoop) {
 						Rect leftBound = bounds.get(iLoop - 1);
 						// Intersection
-						if (bound.left - TITLE_PADDING < leftBound.right ) {
-							bound.left = leftBound.right + titlePadding;
+						if (bound.left - TITLE_PADDING < leftBound.right) {
+							bound.left = leftBound.right + (int)titlePadding;
 						}
 					}
 				}
@@ -187,8 +195,8 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 			if ((bound.left > getLeft() && bound.left < getLeft() + getWidth()) || (bound.right > getLeft() && bound.right < getLeft() + getWidth())) {
 				Paint paint = paintText;
 				// Change the color is the title is closed to the center
-				int middle = ((bound.left + bound.right) / 2 );
-				if (Math.abs(middle - (getWidth() / 2)) < 60) {
+				int middle = (bound.left + bound.right) / 2;
+				if (Math.abs(middle - (getWidth() / 2)) < 20) {
 					paint = paintSelected;
 				}
 			    canvas.drawText(title, bound.left, bound.bottom, paint);
@@ -197,8 +205,10 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 
 		// Draw the footer line
 		path = new Path();
-        path.moveTo(0, getHeight()-footerLineHeight);
-        path.lineTo(getWidth(), getHeight()-footerLineHeight);
+		int coordY = getHeight()-1;
+		coordY -= (footerLineHeight%2 == 1) ? footerLineHeight/2 : footerLineHeight/2-1;
+		path.moveTo(0, coordY);
+		path.lineTo(getWidth(), coordY);
         path.close();        
         canvas.drawPath(path, paintFooterLine);
         // Draw the footer triangle
@@ -212,32 +222,48 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 	}
 
 	/**
+	 * Set bounds for the right textView including clip padding.
+	 * 
+	 * @param curViewBound
+	 *            current bounds.
+	 * @param curViewWidth
+	 *            width of the view.
+	 */
+	private void clipViewOnTheRight(Rect curViewBound, int curViewWidth) {
+		curViewBound.right = getLeft() + getWidth() - (int)clipPadding;
+		curViewBound.left = curViewBound.right - curViewWidth;
+	}
+
+	/**
+	 * Set bounds for the left textView including clip padding.
+	 * 
+	 * @param curViewBound
+	 *            current bounds.
+	 * @param curViewWidth
+	 *            width of the view.
+	 */
+	private void clipViewOnTheLeft(Rect curViewBound, int curViewWidth) {
+		curViewBound.left = 0 + (int)clipPadding;
+		curViewBound.right = curViewWidth;
+	}
+
+	/**
 	 * Calculate views bounds and scroll them according to the current index
 	 * 
 	 * @param paint
+	 * @param currentIndex
 	 * @return
 	 */
 	private ArrayList<Rect> calculateAllBounds(Paint paint) {
-
 		ArrayList<Rect> list = new ArrayList<Rect>();
 		// For each views (If no values then add a fake one)
 		int count = (viewFlow != null && viewFlow.getAdapter() != null) ? viewFlow.getAdapter().getCount() : 1;
 		for (int iLoop = 0; iLoop < count; iLoop++) {
 			Rect bounds = calcBounds(iLoop, paint);
 			int w = (bounds.right - bounds.left);
-			int h = (bounds.bottom - bounds.top + 3);
-            String title = getTitle(iLoop);
-            if(iLoop == 1) {
-			    bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth())) - (int) paint.measureText(title)/3;
-            } else if(iLoop == 2) {
-			    bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth())) - (int) paint.measureText(title) + 1;
-            } else if(iLoop == 3) {
-                bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth())) - (int) paint.measureText(title) + 2;
-            }
-            else {
-                bounds.left = ((getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth()));
-            }
-			bounds.right = bounds.left + w + 10;
+			int h = (bounds.bottom - bounds.top);
+			bounds.left = (getWidth() / 2) - (w / 2) - currentScroll + (iLoop * getWidth());
+			bounds.right = bounds.left + w;
 			bounds.top = 0;
 			bounds.bottom = h;
 			list.add(bounds);
@@ -285,6 +311,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 	 * @see org.taptwo.android.widget.FlowIndicator#onScrolled(int, int, int,
 	 * int)
 	 */
+	@Override
 	public void onScrolled(int h, int v, int oldh, int oldv) {
 		currentScroll = h;
 		invalidate();
@@ -297,6 +324,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 	 * org.taptwo.android.widget.ViewFlow.ViewSwitchListener#onSwitched(android
 	 * .view.View, int)
 	 */
+	@Override
 	public void onSwitched(View view, int position) {
 		currentPosition = position;
 		invalidate();
@@ -309,6 +337,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 	 * org.taptwo.android.widget.FlowIndicator#setViewFlow(org.taptwo.android
 	 * .widget.ViewFlow)
 	 */
+	@Override
 	public void setViewFlow(ViewFlow view) {
 		viewFlow = view;
 		invalidate();
@@ -375,7 +404,7 @@ public class TitleFlowIndicator extends TextView implements FlowIndicator {
 			// Calculate the text bounds
 			Rect bounds = new Rect();
 			bounds.bottom = (int) (paintText.descent()-paintText.ascent());
-			result = bounds.bottom - bounds.top + footerTriangleHeight + footerLineHeight + 10;
+			result = bounds.bottom - bounds.top + (int)footerTriangleHeight + (int)footerLineHeight + 10;
 			return result;
 		}
 		return result;

@@ -28,6 +28,45 @@ public final class R {
         public static final int slide_right_out=0x7f040010;
     }
     public static final class attr {
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int activeColor=0x7f01004d;
+        /** <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>stroke</code></td><td>0</td><td></td></tr>
+<tr><td><code>fill</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int activeType=0x7f010053;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int centered=0x7f010050;
+        /**  Left/right padding of not active view titles. 
+         <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int clipPadding=0x7f010055;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -58,6 +97,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int enabled=0x7f01003b;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fadeOut=0x7f010051;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -66,32 +113,27 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int fillColor=0x7f01004d;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+        public static final int footerColor=0x7f01005c;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int footerColor=0x7f010055;
-        /** <p>Must be an integer value, such as "<code>100</code>".
+        public static final int footerLineHeight=0x7f01005b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int footerLineHeight=0x7f010054;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int footerTriangleHeight=0x7f010056;
+        public static final int footerTriangleHeight=0x7f01005d;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -455,6 +497,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
          */
         public static final int inDensity=0x7f01004b;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int inactiveColor=0x7f01004e;
+        /** <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>stroke</code></td><td>0</td><td></td></tr>
+<tr><td><code>fill</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int inactiveType=0x7f010052;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -463,7 +525,9 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int isInProgress=0x7f01003d;
-        /** <p>Must be an integer value, such as "<code>100</code>".
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
@@ -479,6 +543,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int segmentedContentView=0x7f010045;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int selectedBold=0x7f010057;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -487,7 +559,17 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int selectedColor=0x7f010051;
+        public static final int selectedColor=0x7f010056;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int selectedSize=0x7f010058;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -496,15 +578,6 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int sidebuffer=0x7f01004c;
-        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
-"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int strokeColor=0x7f01004e;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -537,15 +610,17 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int textColor=0x7f010052;
-        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+        public static final int textColor=0x7f010059;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int textSize=0x7f010053;
+        public static final int textSize=0x7f01005a;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
@@ -558,14 +633,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int title=0x7f010046;
-        /** <p>Must be an integer value, such as "<code>100</code>".
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int titlePadding=0x7f010050;
+        public static final int titlePadding=0x7f010054;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -600,6 +677,7 @@ containing a value of this type.
         public static final int X=0x7f06000b;
         public static final int gd_action_bar_divider_tint=0x7f060001;
         public static final int gd_action_bar_tint=0x7f060000;
+        public static final int white=0x7f06000c;
     }
     public static final class dimen {
         public static final int gd_action_bar_height=0x7f07000b;
@@ -683,61 +761,64 @@ containing a value of this type.
         public static final int gd_tab_indicator_selected=0x7f02003f;
         public static final int gd_tab_indicator_unselected=0x7f020040;
         public static final int grades_icon=0x7f020041;
-        public static final int icon=0x7f020042;
-        public static final int list_header_bg=0x7f020043;
-        public static final int module_summary_icon=0x7f020044;
-        public static final int profile_icon=0x7f020045;
-        public static final int schedule_icon=0x7f020046;
-        public static final int tab_bar=0x7f020047;
+        public static final int header_title=0x7f020042;
+        public static final int icon=0x7f020043;
+        public static final int list_header_bg=0x7f020044;
+        public static final int module_summary_icon=0x7f020045;
+        public static final int profile_icon=0x7f020046;
+        public static final int schedule_icon=0x7f020047;
+        public static final int tab_bar=0x7f020048;
     }
     public static final class id {
-        public static final int action_bar_refresh=0x7f05000c;
+        public static final int action_bar_refresh=0x7f05000e;
         public static final int dashboard=0x7f050001;
-        public static final int day=0x7f05002a;
-        public static final int day_date=0x7f05002b;
+        public static final int day=0x7f05002c;
+        public static final int day_date=0x7f05002d;
         public static final int empty=0x7f050002;
+        public static final int fill=0x7f05000d;
         public static final int gd_action_bar=0x7f050009;
         public static final int gd_action_bar_content_view=0x7f05000b;
-        public static final int gd_action_bar_home_item=0x7f050011;
+        public static final int gd_action_bar_home_item=0x7f050013;
         public static final int gd_action_bar_host=0x7f05000a;
-        public static final int gd_action_bar_item=0x7f050013;
-        public static final int gd_action_bar_item_progress_bar=0x7f050014;
-        public static final int gd_action_bar_title=0x7f050012;
-        public static final int gd_description=0x7f050015;
-        public static final int gd_drawable=0x7f050016;
-        public static final int gd_progress_bar=0x7f050018;
+        public static final int gd_action_bar_item=0x7f050015;
+        public static final int gd_action_bar_item_progress_bar=0x7f050016;
+        public static final int gd_action_bar_title=0x7f050014;
+        public static final int gd_description=0x7f050017;
+        public static final int gd_drawable=0x7f050018;
+        public static final int gd_progress_bar=0x7f05001a;
         public static final int gd_segmented_bar=0x7f050007;
         public static final int gd_segmented_content_view=0x7f050008;
-        public static final int gd_separator_text=0x7f050021;
-        public static final int gd_subtext=0x7f050022;
-        public static final int gd_subtitle=0x7f050023;
-        public static final int gd_text=0x7f050017;
-        public static final int gd_thumbnail=0x7f050024;
-        public static final int gdi_arrow_down=0x7f05001f;
-        public static final int gdi_arrow_up=0x7f05001a;
-        public static final int gdi_footer=0x7f05001e;
-        public static final int gdi_grid=0x7f050020;
-        public static final int gdi_header=0x7f050019;
-        public static final int gdi_quick_action_items=0x7f05001d;
-        public static final int gdi_rack=0x7f05001c;
-        public static final int gdi_scroll=0x7f05001b;
-        public static final int grade_holder=0x7f050026;
-        public static final int gv_dashboard=0x7f05000e;
+        public static final int gd_separator_text=0x7f050023;
+        public static final int gd_subtext=0x7f050024;
+        public static final int gd_subtitle=0x7f050025;
+        public static final int gd_text=0x7f050019;
+        public static final int gd_thumbnail=0x7f050026;
+        public static final int gdi_arrow_down=0x7f050021;
+        public static final int gdi_arrow_up=0x7f05001c;
+        public static final int gdi_footer=0x7f050020;
+        public static final int gdi_grid=0x7f050022;
+        public static final int gdi_header=0x7f05001b;
+        public static final int gdi_quick_action_items=0x7f05001f;
+        public static final int gdi_rack=0x7f05001e;
+        public static final int gdi_scroll=0x7f05001d;
+        public static final int grade_holder=0x7f050028;
+        public static final int gv_dashboard=0x7f050010;
         public static final int hdpi=0x7f050005;
-        public static final int header_layout=0x7f050027;
-        public static final int iv_dashboard_icon=0x7f05000f;
+        public static final int header_layout=0x7f050029;
+        public static final int iv_dashboard_icon=0x7f050011;
         public static final int ldpi=0x7f050003;
         public static final int mdpi=0x7f050004;
-        public static final int menu_preferences=0x7f05000d;
+        public static final int menu_preferences=0x7f05000f;
         public static final int normal=0x7f050000;
-        public static final int subtitle1=0x7f05002c;
-        public static final int subtitle2=0x7f05002d;
-        public static final int time_ampm=0x7f05002f;
-        public static final int time_hhmm=0x7f05002e;
-        public static final int title=0x7f050025;
-        public static final int tv_dashboard_label=0x7f050010;
-        public static final int vf_timetable=0x7f050029;
-        public static final int vf_timetable_indicator=0x7f050028;
+        public static final int stroke=0x7f05000c;
+        public static final int subtitle1=0x7f05002e;
+        public static final int subtitle2=0x7f05002f;
+        public static final int time_ampm=0x7f050031;
+        public static final int time_hhmm=0x7f050030;
+        public static final int title=0x7f050027;
+        public static final int tv_dashboard_label=0x7f050012;
+        public static final int vf_timetable=0x7f05002b;
+        public static final int vf_timetable_indicator=0x7f05002a;
         public static final int xhdpi=0x7f050006;
     }
     public static final class layout {
@@ -779,7 +860,7 @@ containing a value of this type.
     }
     public static final class string {
         public static final int app_name=0x7f08001b;
-        public static final int app_preferences=0x7f08001c;
+        public static final int app_preferences=0x7f080020;
         public static final int gd_add=0x7f08000b;
         public static final int gd_all_friends=0x7f080016;
         public static final int gd_compass=0x7f08000f;
@@ -807,6 +888,10 @@ containing a value of this type.
         public static final int gd_take_photo=0x7f080007;
         public static final int gd_talk=0x7f080002;
         public static final int gd_trashcan=0x7f080014;
+        public static final int module_summary=0x7f08001e;
+        public static final int profile=0x7f08001f;
+        public static final int recent_grades=0x7f08001d;
+        public static final int timetable=0x7f08001c;
     }
     public static final class style {
         public static final int GreenDroid=0x7f090006;
@@ -886,8 +971,6 @@ containing a value of this type.
         public static final int TextAppearance_TabIndicator=0x7f090005;
         public static final int Theme_GreenDroid=0x7f090033;
         public static final int Theme_GreenDroid_NoTitleBar=0x7f090034;
-        /** <item name="gdActionBarApplicationDrawable">@drawable/greendroid_application_logo</item>
-         */
         public static final int Theme_LeoApp=0x7f090035;
     }
     public static final class styleable {
@@ -957,19 +1040,28 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CircleFlowIndicator_fillColor sg.rp.geeks.leoapp:fillColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleFlowIndicator_activeColor sg.rp.geeks.leoapp:activeColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleFlowIndicator_activeType sg.rp.geeks.leoapp:activeType}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleFlowIndicator_centered sg.rp.geeks.leoapp:centered}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleFlowIndicator_fadeOut sg.rp.geeks.leoapp:fadeOut}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleFlowIndicator_inactiveColor sg.rp.geeks.leoapp:inactiveColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CircleFlowIndicator_inactiveType sg.rp.geeks.leoapp:inactiveType}</code></td><td></td></tr>
            <tr><td><code>{@link #CircleFlowIndicator_radius sg.rp.geeks.leoapp:radius}</code></td><td></td></tr>
-           <tr><td><code>{@link #CircleFlowIndicator_strokeColor sg.rp.geeks.leoapp:strokeColor}</code></td><td></td></tr>
            </table>
-           @see #CircleFlowIndicator_fillColor
+           @see #CircleFlowIndicator_activeColor
+           @see #CircleFlowIndicator_activeType
+           @see #CircleFlowIndicator_centered
+           @see #CircleFlowIndicator_fadeOut
+           @see #CircleFlowIndicator_inactiveColor
+           @see #CircleFlowIndicator_inactiveType
            @see #CircleFlowIndicator_radius
-           @see #CircleFlowIndicator_strokeColor
          */
         public static final int[] CircleFlowIndicator = {
-            0x7f01004d, 0x7f01004e, 0x7f01004f
+            0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050,
+            0x7f010051, 0x7f010052, 0x7f010053
         };
         /**
-          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#fillColor}
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#activeColor}
           attribute's value can be found in the {@link #CircleFlowIndicator} array.
 
 
@@ -980,11 +1072,42 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:fillColor
+          @attr name android:activeColor
         */
-        public static final int CircleFlowIndicator_fillColor = 0;
+        public static final int CircleFlowIndicator_activeColor = 0;
         /**
-          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#radius}
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#activeType}
+          attribute's value can be found in the {@link #CircleFlowIndicator} array.
+
+
+          <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>stroke</code></td><td>0</td><td></td></tr>
+<tr><td><code>fill</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name android:activeType
+        */
+        public static final int CircleFlowIndicator_activeType = 6;
+        /**
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#centered}
+          attribute's value can be found in the {@link #CircleFlowIndicator} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:centered
+        */
+        public static final int CircleFlowIndicator_centered = 3;
+        /**
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#fadeOut}
           attribute's value can be found in the {@link #CircleFlowIndicator} array.
 
 
@@ -994,11 +1117,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:radius
+          @attr name android:fadeOut
         */
-        public static final int CircleFlowIndicator_radius = 2;
+        public static final int CircleFlowIndicator_fadeOut = 4;
         /**
-          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#strokeColor}
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#inactiveColor}
           attribute's value can be found in the {@link #CircleFlowIndicator} array.
 
 
@@ -1009,9 +1132,42 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:strokeColor
+          @attr name android:inactiveColor
         */
-        public static final int CircleFlowIndicator_strokeColor = 1;
+        public static final int CircleFlowIndicator_inactiveColor = 1;
+        /**
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#inactiveType}
+          attribute's value can be found in the {@link #CircleFlowIndicator} array.
+
+
+          <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>stroke</code></td><td>0</td><td></td></tr>
+<tr><td><code>fill</code></td><td>1</td><td></td></tr>
+</table>
+          @attr name android:inactiveType
+        */
+        public static final int CircleFlowIndicator_inactiveType = 5;
+        /**
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#radius}
+          attribute's value can be found in the {@link #CircleFlowIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:radius
+        */
+        public static final int CircleFlowIndicator_radius = 2;
         /** Attributes that can be used with a DescriptionItem.
          */
         public static final int[] DescriptionItem = {
@@ -1383,26 +1539,51 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TitleFlowIndicator_clipPadding sg.rp.geeks.leoapp:clipPadding}</code></td><td> Left/right padding of not active view titles.</td></tr>
            <tr><td><code>{@link #TitleFlowIndicator_footerColor sg.rp.geeks.leoapp:footerColor}</code></td><td></td></tr>
            <tr><td><code>{@link #TitleFlowIndicator_footerLineHeight sg.rp.geeks.leoapp:footerLineHeight}</code></td><td></td></tr>
            <tr><td><code>{@link #TitleFlowIndicator_footerTriangleHeight sg.rp.geeks.leoapp:footerTriangleHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TitleFlowIndicator_selectedBold sg.rp.geeks.leoapp:selectedBold}</code></td><td></td></tr>
            <tr><td><code>{@link #TitleFlowIndicator_selectedColor sg.rp.geeks.leoapp:selectedColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #TitleFlowIndicator_selectedSize sg.rp.geeks.leoapp:selectedSize}</code></td><td></td></tr>
            <tr><td><code>{@link #TitleFlowIndicator_textColor sg.rp.geeks.leoapp:textColor}</code></td><td></td></tr>
            <tr><td><code>{@link #TitleFlowIndicator_textSize sg.rp.geeks.leoapp:textSize}</code></td><td></td></tr>
            <tr><td><code>{@link #TitleFlowIndicator_titlePadding sg.rp.geeks.leoapp:titlePadding}</code></td><td></td></tr>
            </table>
+           @see #TitleFlowIndicator_clipPadding
            @see #TitleFlowIndicator_footerColor
            @see #TitleFlowIndicator_footerLineHeight
            @see #TitleFlowIndicator_footerTriangleHeight
+           @see #TitleFlowIndicator_selectedBold
            @see #TitleFlowIndicator_selectedColor
+           @see #TitleFlowIndicator_selectedSize
            @see #TitleFlowIndicator_textColor
            @see #TitleFlowIndicator_textSize
            @see #TitleFlowIndicator_titlePadding
          */
         public static final int[] TitleFlowIndicator = {
-            0x7f010050, 0x7f010051, 0x7f010052, 0x7f010053,
-            0x7f010054, 0x7f010055, 0x7f010056
+            0x7f010054, 0x7f010055, 0x7f010056, 0x7f010057,
+            0x7f010058, 0x7f010059, 0x7f01005a, 0x7f01005b,
+            0x7f01005c, 0x7f01005d
         };
+        /**
+          <p>
+          @attr description
+           Left/right padding of not active view titles. 
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name android:clipPadding
+        */
+        public static final int TitleFlowIndicator_clipPadding = 1;
         /**
           <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#footerColor}
           attribute's value can be found in the {@link #TitleFlowIndicator} array.
@@ -1417,13 +1598,15 @@ theme attribute (in the form
 containing a value of this type.
           @attr name android:footerColor
         */
-        public static final int TitleFlowIndicator_footerColor = 5;
+        public static final int TitleFlowIndicator_footerColor = 8;
         /**
           <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#footerLineHeight}
           attribute's value can be found in the {@link #TitleFlowIndicator} array.
 
 
-          <p>Must be an integer value, such as "<code>100</code>".
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
@@ -1431,13 +1614,15 @@ theme attribute (in the form
 containing a value of this type.
           @attr name android:footerLineHeight
         */
-        public static final int TitleFlowIndicator_footerLineHeight = 4;
+        public static final int TitleFlowIndicator_footerLineHeight = 7;
         /**
           <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#footerTriangleHeight}
           attribute's value can be found in the {@link #TitleFlowIndicator} array.
 
 
-          <p>Must be an integer value, such as "<code>100</code>".
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
@@ -1445,7 +1630,21 @@ theme attribute (in the form
 containing a value of this type.
           @attr name android:footerTriangleHeight
         */
-        public static final int TitleFlowIndicator_footerTriangleHeight = 6;
+        public static final int TitleFlowIndicator_footerTriangleHeight = 9;
+        /**
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#selectedBold}
+          attribute's value can be found in the {@link #TitleFlowIndicator} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:selectedBold
+        */
+        public static final int TitleFlowIndicator_selectedBold = 3;
         /**
           <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#selectedColor}
           attribute's value can be found in the {@link #TitleFlowIndicator} array.
@@ -1460,7 +1659,23 @@ theme attribute (in the form
 containing a value of this type.
           @attr name android:selectedColor
         */
-        public static final int TitleFlowIndicator_selectedColor = 1;
+        public static final int TitleFlowIndicator_selectedColor = 2;
+        /**
+          <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#selectedSize}
+          attribute's value can be found in the {@link #TitleFlowIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:selectedSize
+        */
+        public static final int TitleFlowIndicator_selectedSize = 4;
         /**
           <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#textColor}
           attribute's value can be found in the {@link #TitleFlowIndicator} array.
@@ -1475,13 +1690,15 @@ theme attribute (in the form
 containing a value of this type.
           @attr name android:textColor
         */
-        public static final int TitleFlowIndicator_textColor = 2;
+        public static final int TitleFlowIndicator_textColor = 5;
         /**
           <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#textSize}
           attribute's value can be found in the {@link #TitleFlowIndicator} array.
 
 
-          <p>Must be a floating point value, such as "<code>1.2</code>".
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
@@ -1489,13 +1706,15 @@ theme attribute (in the form
 containing a value of this type.
           @attr name android:textSize
         */
-        public static final int TitleFlowIndicator_textSize = 3;
+        public static final int TitleFlowIndicator_textSize = 6;
         /**
           <p>This symbol is the offset where the {@link sg.rp.geeks.leoapp.R.attr#titlePadding}
           attribute's value can be found in the {@link #TitleFlowIndicator} array.
 
 
-          <p>Must be an integer value, such as "<code>100</code>".
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
